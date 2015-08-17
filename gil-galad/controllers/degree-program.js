@@ -8,3 +8,11 @@ exports.find = function(req, res, next) {
 		res.send(rows);
 	});
 };
+
+
+exports.insert = function(req, res, next) {
+	db.query("INSERT INTO degree_program(code, name) VALUES(?, ?)", [req.body.code, req.body.name], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
