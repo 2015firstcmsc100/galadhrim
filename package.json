@@ -1,0 +1,32 @@
+{
+  "name": "galadhrim",
+  "version": "0.0.1",
+  "description": "University Information System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mightybulacs/galadhrim.git"
+  },
+  "keywords": [
+    "information",
+    "system",
+    "uplb"
+  ],
+  "author": "rvbulalacao, mbbderobles, kepbautista",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mightybulacs/galadhrim/issues"
+  },
+  "homepage": "https://github.com/mightybulacs/galadhrim",
+  "dependencies": {
+    "body-parser": "^1.6.5",
+    "express": "^4.8.5",
+    "method-override": "^2.1.3",
+    "morgan": "^1.2.3",
+    "mysql": "^2.5.1",
+    "winston": "^0.7.3"
+  }
+}
