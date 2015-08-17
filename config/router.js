@@ -12,6 +12,9 @@ module.exports = function(router, logger) {
 	router.route('/degree-programs')
 		.get(degreeProgram.find)
 		.post(degreeProgram.insert);
+
+	router.route('/degree-programs/:id')
+		.get(degreeProgram.findOne);
 	
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
