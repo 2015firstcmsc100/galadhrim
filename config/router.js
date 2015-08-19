@@ -14,7 +14,8 @@ module.exports = function(router, logger) {
 		.post(degreeProgram.insert);
 
 	router.route('/degree-programs/:id')
-		.get(degreeProgram.findOne);
+		.get(degreeProgram.findOne)
+		.put(degreeProgram.update);
 	
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});

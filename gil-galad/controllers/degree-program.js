@@ -28,3 +28,11 @@ exports.insert = function(req, res, next) {
 		res.send(rows);
 	});
 };
+
+
+exports.update = function(req, res, next) {
+	db.query("UPDATE degree_program SET code=?, name=? WHERE id=?", [req.body.code, req.body.name, req.params.id], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
