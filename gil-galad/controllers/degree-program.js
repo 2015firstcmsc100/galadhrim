@@ -36,3 +36,11 @@ exports.update = function(req, res, next) {
 		res.send(rows);
 	});
 };
+
+
+exports.remove = function(req, res, next) {
+	db.query("DELETE FROM degree_program WHERE id=?", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
