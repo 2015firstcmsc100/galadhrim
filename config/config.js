@@ -4,7 +4,7 @@ var path = require('path'),
 			env: 'development',
 			port: 5000,
 			db: {
-				host	: 'galadhrim.cl0h6qpughas.ap-southeast-1.rds.amazonaws.com',
+				host	: 'localhost',
 				port	: 3306,
 				name	: 'galadhrim',
 				user	: 'galadhrim',
@@ -12,7 +12,7 @@ var path = require('path'),
 			}
 		},
 		staging: {
-			env: 'development',
+			env: 'staging',
 			port: 5000,
 			db: {
 				host	: 'galadhrim.cl0h6qpughas.ap-southeast-1.rds.amazonaws.com',
@@ -23,7 +23,7 @@ var path = require('path'),
 			}
 		},
 		production: {
-			env: 'development',
+			env: 'production',
 			port: 5000,
 			db: {
 				host	: 'galadhrim.cl0h6qpughas.ap-southeast-1.rds.amazonaws.com',
