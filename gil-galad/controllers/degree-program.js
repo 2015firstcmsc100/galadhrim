@@ -23,6 +23,13 @@ exports.findOne = function(req, res, next) {
 
 
 exports.insert = function(req, res, next) {
+	if (!req.body.code) {
+		return res.send(551, {'error': true, 'message': 'Missing parameter: code'});
+	}
+	if (!req.body.name) {
+		return res.send(551, {'error': true, 'message': 'Missing parameter: name'});
+	}
+	console.log(req.body);
 	db.query("INSERT INTO degree_program(code, name) VALUES(?, ?)", [req.body.code, req.body.name], function(err, rows) {
 		if (err) return next(err);
 		res.send(rows);
