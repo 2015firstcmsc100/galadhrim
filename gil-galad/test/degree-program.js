@@ -7,6 +7,7 @@ var config = require(__dirname + '/../../config/config'),
 describe('Degree Program', function() {
 	var url = 'http://galadhrim.loc:' + (process.env.PORT || config.port);
 	var randomizedCode = utils.getRandomString();
+	var insertedId = 0;
 
 
 	describe('insert()', function () {
@@ -24,6 +25,7 @@ describe('Degree Program', function() {
 					}
 					res.should.have.status(200);
 					res.body.should.have.keys(['id', 'code', 'name']);
+					insertedId = res.body.id;
 					done();
 				});
 		});
@@ -98,7 +100,7 @@ describe('Degree Program', function() {
 	describe('findOne()', function () {
 		it('should retrieve a specific degree program record', function (done) {
 			request(url)
-				.get('/degree-programs/1')
+				.get('/degree-programs/' + insertedId)
 				.end(function(err, res) {
 					if (err) {
 						throw err;
@@ -125,9 +127,93 @@ describe('Degree Program', function() {
 
 
 	describe('update()', function () {
-		it('should update a specific degree program record', function (done) {
+		
+		it('should update a specific degree program record: code field only', function (done) {
+			var update = {
+				'code': randomizedCode + '(edited)',
+			};
 			request(url)
-				.get('/degree-programs/1')
+				.put('/degree-programs/' + insertedId)
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					else {
+						res.should.have.status(200);
+						res.body.should.have.property('code', randomizedCode + '(edited)');
+						res.body.should.have.property('name', 'BS Computer Science');
+						done();
+					}
+				});
+		});
+
+
+		it('should update a specific degree program record: name field only', function (done) {
+			var update = {
+				'name': 'BS Computer Science(edited)'
+			};
+			request(url)
+				.put('/degree-programs/' + insertedId)
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					else {
+						res.should.have.status(200);
+						res.body.should.have.property('code', randomizedCode + '(edited)');
+						res.body.should.have.property('name', 'BS Computer Science(edited)');
+						done();
+					}
+				});
+		});
+
+
+		it('should update a specific degree program record', function (done) {
+			var update = {
+				'code': randomizedCode,
+				'name': 'BS Computer Science'
+			};
+			request(url)
+				.put('/degree-programs/' + insertedId)
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					res.body.should.have.property('code', randomizedCode);
+					res.body.should.have.property('name', 'BS Computer Science');
+					done();
+				});
+		});
+
+
+		it('should return error trying to update a degree program record that does not exist', function (done) {
+			var update = {
+				'code': randomizedCode + '(edited)',
+				'name': 'BS Computer Science(edited)'
+			};
+			request(url)
+				.put('/degree-programs/0')
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						done();
+					}
+					else {
+						throw new Error({'message': 'Able to retrieve a non-existent degree program'});
+					}
+				});
+		});
+	});
+
+
+	describe('remove()', function () {
+		it('should remove a specific degree program record', function (done) {
+			request(url)
+				.delete('/degree-programs/' + insertedId)
 				.end(function(err, res) {
 					if (err) {
 						throw err;
@@ -138,15 +224,15 @@ describe('Degree Program', function() {
 		});
 
 
-		it('should return error trying to retrieve a degree program record that does not exist', function (done) {
+		it('should return error trying to remove a degree program record that does not exist', function (done) {
 			request(url)
-				.get('/degree-programs/0')
+				.delete('/degree-programs/0')
 				.end(function(err, res) {
 					if (err) {
 						done();
 					}
 					else {
-						throw new Error({'message': 'Able to retrieve a non-existent degree program'});
+						throw new Error({'message': 'Able to delete a non-existent degree program'});
 					}
 				});
 		});

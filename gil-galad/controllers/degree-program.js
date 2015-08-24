@@ -34,7 +34,7 @@ exports.insert = function(req, res, next) {
 		if (err) return next(err);
 		selectOne(row.insertId, function(newRow) {
 			if (!newRow) {
-				res.send(552, {message: 'Degree program ('+id+') not found.'});
+				res.send(552, {message: 'Degree program ('+row.insertId+') was not created.'});
 			} else {
 				res.send(newRow);
 			}
@@ -44,13 +44,13 @@ exports.insert = function(req, res, next) {
 
 
 exports.update = function(req, res, next) {
-	db.query("UPDATE degree_program SET code=?, name=? WHERE id=?", [req.body.code, req.body.name, req.params.id], function(err, rows) {
+	db.query("UPDATE degree_program SET ? WHERE id=?", [req.body, req.params.id], function(err, rows) {
 		if (err) return next(err);
-		selectOne(row.insertId, function(newRow) {
-			if (!newRow) {
-				res.send(552, {message: 'Degree program ('+id+') not found.'});
+		selectOne(req.params.id, function(updatedRow) {
+			if (!updatedRow) {
+				res.send(553, {message: 'Degree program ('+req.params.id+') was not updated.'});
 			} else {
-				res.send(newRow);
+				res.send(updatedRow);
 			}
 		});
 	});
@@ -58,9 +58,14 @@ exports.update = function(req, res, next) {
 
 
 exports.remove = function(req, res, next) {
-	db.query("DELETE FROM degree_program WHERE id=?", [req.params.id], function(err, rows) {
+	db.query("DELETE FROM degree_program WHERE id=?", [req.params.id], function(err, row) {
 		if (err) return next(err);
-		res.send(rows);
+		if (row.affectedRows === 0) {
+			res.send(554, {message: 'Degree program ('+req.params.id+') was not removed.'});
+		} else {
+			res.send(row);
+		}
+		
 	});
 };
 
