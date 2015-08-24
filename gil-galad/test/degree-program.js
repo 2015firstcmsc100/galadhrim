@@ -23,7 +23,7 @@ describe('Degree Program', function() {
 						throw err;
 					}
 					res.should.have.status(200);
-					res.body.should.have.properties(['insertId']);
+					res.body.should.have.keys(['id', 'code', 'name']);
 					done();
 				});
 		});
@@ -65,7 +65,6 @@ describe('Degree Program', function() {
 			var degreeProgram = {
 				'code': utils.getRandomString(),
 			};
-			console.log(degreeProgram);
 			request(url)
 				.post('/degree-programs')
 				.send(degreeProgram)
@@ -98,6 +97,35 @@ describe('Degree Program', function() {
 
 	describe('findOne()', function () {
 		it('should retrieve a specific degree program record', function (done) {
+			request(url)
+				.get('/degree-programs/1')
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+
+		it('should return error trying to retrieve a degree program record that does not exist', function (done) {
+			request(url)
+				.get('/degree-programs/0')
+				.end(function(err, res) {
+					if (err) {
+						done();
+					}
+					else {
+						throw new Error({'message': 'Able to retrieve a non-existent degree program'});
+					}
+				});
+		});
+	});
+
+
+	describe('update()', function () {
+		it('should update a specific degree program record', function (done) {
 			request(url)
 				.get('/degree-programs/1')
 				.end(function(err, res) {

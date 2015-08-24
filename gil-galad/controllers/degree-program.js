@@ -29,10 +29,16 @@ exports.insert = function(req, res, next) {
 	if (!req.body.name) {
 		return res.send(551, {'error': true, 'message': 'Missing parameter: name'});
 	}
-	console.log(req.body);
-	db.query("INSERT INTO degree_program(code, name) VALUES(?, ?)", [req.body.code, req.body.name], function(err, rows) {
+	
+	db.query("INSERT INTO degree_program(code, name) VALUES(?, ?)", [req.body.code, req.body.name], function(err, row) {
 		if (err) return next(err);
-		res.send(rows);
+		selectOne(row.insertId, function(newRow) {
+			if (!newRow) {
+				res.send(552, {message: 'Degree program ('+id+') not found.'});
+			} else {
+				res.send(newRow);
+			}
+		});
 	});
 };
 
@@ -40,7 +46,13 @@ exports.insert = function(req, res, next) {
 exports.update = function(req, res, next) {
 	db.query("UPDATE degree_program SET code=?, name=? WHERE id=?", [req.body.code, req.body.name, req.params.id], function(err, rows) {
 		if (err) return next(err);
-		res.send(rows);
+		selectOne(row.insertId, function(newRow) {
+			if (!newRow) {
+				res.send(552, {message: 'Degree program ('+id+') not found.'});
+			} else {
+				res.send(newRow);
+			}
+		});
 	});
 };
 
@@ -51,3 +63,15 @@ exports.remove = function(req, res, next) {
 		res.send(rows);
 	});
 };
+
+
+var selectOne = function(id, callback) {
+	db.query("SELECT * FROM degree_program WHERE id=? LIMIT 1", [id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			callback(null);
+		} else {
+			callback(rows[0]);
+		}
+	});
+}
