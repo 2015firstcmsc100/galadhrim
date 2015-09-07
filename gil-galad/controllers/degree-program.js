@@ -63,7 +63,7 @@ exports.remove = function(req, res, next) {
 		if (row.affectedRows === 0) {
 			res.send(554, {message: 'Degree program ('+req.params.id+') was not removed.'});
 		} else {
-			res.send(row);
+			res.send(202, row);
 		}
 		
 	});
