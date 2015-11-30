@@ -24,7 +24,7 @@
   "homepage": "https://github.com/mightybulacs/galadhrim",
   "dependencies": {
     "body-parser": "^1.6.5",
-    "express": "^4.8.5",
+    "express": "~4.13.3",
     "method-override": "^2.1.3",
     "morgan": "^1.2.3",
     "mysql": "^2.5.1",
