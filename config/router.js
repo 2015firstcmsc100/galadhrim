@@ -1,5 +1,6 @@
 var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-program');
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
+var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
 		logger.log('verbose', req.method);
@@ -27,6 +28,9 @@ module.exports = function(router, logger) {
 		.put(curriculum.update)
 		.delete(curriculum.remove);
 	
+	router.route('/api/ocm/finalize/:id')
+		.put(finalize.update);
+		
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
