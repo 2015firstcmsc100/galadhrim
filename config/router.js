@@ -9,33 +9,37 @@ var employees = require(__dirname + '/../gil-galad/controllers/api/employees');
 var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-record');
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
+var section = require(__dirname + '/../gil-galad/controllers/api/section');
 
-module.exports = function(router, logger) {
-	router.all('*', function (req, res, next) {
-		logger.log('verbose', req.method);
-		logger.log('verbose', req.params);
-		logger.log('verbose', req.query);
-		logger.log('verbose', req.body);
-		next();
-	});
+ module.exports = function(router, logger) {
+ 	router.all('*', function (req, res, next) {
+ 		logger.log('verbose', req.method);
+ 		logger.log('verbose', req.params);
+ 		logger.log('verbose', req.query);
+ 		logger.log('verbose', req.body);
+ 		next();
+ 	});
 
-	router.route('/degree-programs')
-		.get(degreeProgram.find)
-		.post(degreeProgram.insert);
+ 	router.route('/degree-programs')
+ 		.get(degreeProgram.find)
+ 		.post(degreeProgram.insert);
 
-	router.route('/degree-programs/:id')
-		.get(degreeProgram.findOne)
-		.put(degreeProgram.update)
-		.delete(degreeProgram.remove);
+ 	router.route('/degree-programs/:id')
+ 		.get(degreeProgram.findOne)
+ 		.put(degreeProgram.update)
+ 		.delete(degreeProgram.remove);
 
-	router.route('/curriculum')
-		.get(curriculum.find)
-		.post(curriculum.insert);
+ 	router.route('/curriculum')
+ 		.get(curriculum.find)
+ 		.post(curriculum.insert);
 
-	router.route('/curriculum/:id')
-		.get(curriculum.findOne)
-		.put(curriculum.update)
-		.delete(curriculum.remove);
+ 	router.route('/curriculum/:id')
+ 		.get(curriculum.findOne)
+ 		.put(curriculum.update)
+ 		.delete(curriculum.remove);
+
+	router.route('/api/sections')
+ 		.post(section.insert);
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
@@ -66,11 +70,6 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/waitlist/:id')
 		.delete(waitlist.deleteWaitlist);
-
-
-
-		var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
-
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
