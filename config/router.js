@@ -8,6 +8,7 @@ var grades = require(__dirname + '/../gil-galad/controllers/api/students');
 var employees = require(__dirname + '/../gil-galad/controllers/api/employees');
 var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-record');
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
+var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
@@ -26,7 +27,7 @@ module.exports = function(router, logger) {
 		.get(degreeProgram.findOne)
 		.put(degreeProgram.update)
 		.delete(degreeProgram.remove);
-	
+
 	router.route('/curriculum')
 		.get(curriculum.find)
 		.post(curriculum.insert);
@@ -35,16 +36,16 @@ module.exports = function(router, logger) {
 		.get(curriculum.findOne)
 		.put(curriculum.update)
 		.delete(curriculum.remove);
-	
+
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
-	
+
 	router.route('/api/password/reset/:id')
 		.get(password.reset);
 
 	router.route('/courses')
 		.get(course.find);
-		
+
 	router.route('/api/plan-of-study/:id')
 		.put(plan_of_study.update);
 
@@ -59,10 +60,18 @@ module.exports = function(router, logger) {
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
-		
+
 	router.route('/api/ocm/assign-faculty/:id')
 		.put(assignFaculty.update);
-	
+
+	router.route('/api/ocm/waitlist/:id')
+		.delete(waitlist.deleteWaitlist);
+
+
+
+		var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
+
+
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
 	});
@@ -72,5 +81,5 @@ module.exports = function(router, logger) {
 		return next(err);
 	});
 
-	return router;	
+	return router;
 };
