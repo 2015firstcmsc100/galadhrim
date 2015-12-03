@@ -10,7 +10,7 @@
 	DegreeProgramsService.$inject = ["$http", "$q"];
 
 	function DegreeProgramsService($http, $q) {
-		var url = "http://localhost:5000";					//di po ako sure dito kung localhost:5000
+		var url = 'http://galadhrim.loc'+ (process.env.PORT || config.port);					//di po ko sure
 		var service = {};
 		service.GetAll = GetAll;
 		service.AddDegreeProgram = AddDegreeProgram;
