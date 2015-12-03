@@ -3,7 +3,7 @@ var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/course');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
-
+var grades = require(__dirname + '/../gil-galad/controllers/api/students');
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
 		logger.log('verbose', req.method);
@@ -40,6 +40,9 @@ module.exports = function(router, logger) {
 	router.route('/courses')
 		.get(course.find);
 
+	router.route('/api/students/:id/grades')
+		.get(grades.findstudentGrade);
+	
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
 	});
