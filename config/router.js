@@ -3,6 +3,7 @@ var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/course');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
+var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan-of-study');
 
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
@@ -35,10 +36,13 @@ module.exports = function(router, logger) {
 		.put(finalize.update);
 	
 	router.route('/api/password/reset/:id')
-		.get(password.reset)		
+		.get(password.reset);
 
 	router.route('/courses')
 		.get(course.find);
+
+	router.route('/api/plan-of-study')
+		.post(planOfStudy.insert);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
