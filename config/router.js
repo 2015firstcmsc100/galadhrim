@@ -7,6 +7,7 @@ var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan-of-stu
 var grades = require(__dirname + '/../gil-galad/controllers/api/students');
 var employees = require(__dirname + '/../gil-galad/controllers/api/employees');
 var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-record');
+var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
 
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
@@ -58,6 +59,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
+		
+	router.route('/api/ocm/assign-faculty/:id')
+		.put(assignFaculty.update);
 	
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
