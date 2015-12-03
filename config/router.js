@@ -3,12 +3,10 @@ var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/course');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
-<<<<<<< HEAD
 var grades = require(__dirname + '/../gil-galad/controllers/api/students');
-=======
+
 var plan_of_study = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
 
->>>>>>> 9a4a170790a1eac7b319fd3d8a015b52f5a4b32b
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
 		logger.log('verbose', req.method);
