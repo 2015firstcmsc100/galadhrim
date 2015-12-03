@@ -1,5 +1,5 @@
 var	logger = require(__dirname + '/../../lib/logger'),
-    db = require(__dirname + '/../lib/mysql');				//connecting to database
+    db = require(__dirname + '/../../lib/mysql');				//connecting to database
 
 
 exports.findAStudentRecord = function(req, res, next){
