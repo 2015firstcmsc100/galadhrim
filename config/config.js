@@ -32,7 +32,12 @@ var path = require('path'),
 				user	: 'galadhrim',
 				pass	: 'lothlori3n'
 			}
-		}
+		},
+
+		email_sender: {
+	        user: 'galadhrim.app@gmail.com',
+	    	pass: 'galadhrim123'
+    	}
 	};
 
 
