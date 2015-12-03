@@ -6,7 +6,7 @@ var config  = require(__dirname + '/../../../../config/config'),
 
 exports.reset = function(req, res, next){
 
-    db.query("SELECT email FROM user WHERE id=?", [req.params.id], function(err, rows) {
+    db.query("SELECT emailAddress FROM user WHERE id=?", [req.params.id], function(err, rows) {
         if (err) return next(err);
         if (rows.length === 0) {
             res.send(404, {message: 'Unable to reset password. User not found.'});
