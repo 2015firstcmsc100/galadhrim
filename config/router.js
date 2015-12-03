@@ -35,7 +35,7 @@ module.exports = function(router, logger) {
 		.put(finalize.update);
 	
 	router.route('/api/password/reset/:id')
-		.put(password.reset)		
+		.get(password.reset)		
 
 	router.route('/courses')
 		.get(course.find);
