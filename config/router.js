@@ -1,6 +1,8 @@
 var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-program');
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
+var course = require(__dirname + '/../gil-galad/controllers/course');
+
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
 		logger.log('verbose', req.method);
@@ -31,6 +33,8 @@ module.exports = function(router, logger) {
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
 		
+	router.route('/courses')
+		.get(course.find);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
