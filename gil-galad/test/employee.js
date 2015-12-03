@@ -1,11 +1,11 @@
-
-var request = require('supertest'),
+var config = require(__dirname + '/../../config/config'),
+	request = require('supertest'),
 	should = require('should-http');
 
 
 describe('employee',function(){
 
-	var url = 'localhost:5000'; // not sure about this url
+	var url = 'http://galadhrim.loc:' + (process.env.PORT || config.port);
 
 	describe('delete_employee',function(){
 		it('should delete one existing employee record', function(done){
