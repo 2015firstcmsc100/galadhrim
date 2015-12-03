@@ -6,6 +6,7 @@ var password = require(__dirname + '/../gil-galad/controllers/api/password/reset
 var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan-of-study');
 var grades = require(__dirname + '/../gil-galad/controllers/api/students');
 var employees = require(__dirname + '/../gil-galad/controllers/api/employees');
+var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-record');
 
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
@@ -54,6 +55,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/employees')
 		.get(employees.findEmployees);
+
+	router.route('/api/student-record/:id')
+		.get(studentRecord.findAStudentRecord);
 	
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
