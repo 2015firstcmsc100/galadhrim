@@ -29,3 +29,16 @@ CREATE TABLE curriculum_course(
     _updated timestamp
 );
 
+DROP TABLE IF EXISTS course;
+CREATE TABLE course(
+    _id int(11) AUTO_INCREMENT PRIMARY KEY,
+    code varchar(16) NOT NULL,
+    name varchar(256) NOT NULL,
+    units tinyint(2),
+    semesterOffered varchar(3),
+    unitId int(11),
+    _created timestamp DEFAULT CURRENT_TIMESTAMP,
+    _recStatus varchar(8) DEFAULT 'ACTIVE',
+    _updated timestamp,
+    UNIQUE(code)
+);
