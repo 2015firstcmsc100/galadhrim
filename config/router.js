@@ -2,6 +2,7 @@ var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-progra
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/course');
+var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
 
 module.exports = function(router, logger) {
 	router.all('*', function (req, res, next) {
@@ -32,7 +33,10 @@ module.exports = function(router, logger) {
 	
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
-		
+	
+	router.route('/api/password/reset/:id')
+		.put(password.reset)		
+
 	router.route('/courses')
 		.get(course.find);
 

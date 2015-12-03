@@ -32,6 +32,7 @@
     "mocha": "~2.2.5",
     "should": "~7.0.4",
     "supertest": "~1.0.1",
-    "should-http": "0.0.4"
+    "should-http": "0.0.4",
+    "node-mailer": "~0.1.1"
   }
 }
