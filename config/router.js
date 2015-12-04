@@ -56,7 +56,7 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 		.post(courses.insert);
 
   router.route('/api/courses/:id')
-    .delete(course.remove);
+    .put(course.remove);
 
 	router.route('/api/plan-of-study/:id')
 		.put(plan_of_study.update);
