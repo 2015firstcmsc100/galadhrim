@@ -1,5 +1,6 @@
 var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-program');
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
+var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum-course');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/app/courses');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
@@ -38,6 +39,9 @@ var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-
  		.get(curriculum.findOne)
  		.put(curriculum.update)
  		.delete(curriculum.remove);
+
+ 	router.route('/api/curriculum-course/:id')
+ 		.get(curriculum_course.findCourses)
 
 	router.route('/api/sections')
  		.post(section.insert);

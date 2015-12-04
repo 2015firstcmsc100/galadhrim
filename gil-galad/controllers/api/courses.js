@@ -19,14 +19,14 @@ exports.insert = function(req, res, next) {
 	if (!req.body.name) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: name'});
 	}
-	
-	db.query("INSERT INTO course(code, name, units, semesterOffered, unitId) VALUES(?, ?, ?, ?, ?)", 
-		[req.body.code, 
-		 req.body.name, 
-		 req.body.units, 
-		 req.body.semesterOffered, 
-		 req.body.unitId], 
-		 
+
+	db.query("INSERT INTO course(code, name, units, semesterOffered, unitId) VALUES(?, ?, ?, ?, ?)",
+		[req.body.code,
+		 req.body.name,
+		 req.body.units,
+		 req.body.semesterOffered,
+		 req.body.unitId],
+
 		function(err, row) {
 			if (err) return next(err);
 			selectOne(row.insertId, function(newRow) {
@@ -49,3 +49,14 @@ var selectOne = function(id, callback) {
 		}
 	});
 }
+
+exports.remove = function(req, res, next) {
+  db.query("DELETE FROM course WHERE _id=?", [req.params.id], function(err, row) {
+    if (err) return next(err);
+    if (rows.length ===0) {
+      res.send(404, {message: 'Course ('+req.params.id+') was not removed.'})
+    } else {
+      res.send(200, row);
+    }
+  });
+};
