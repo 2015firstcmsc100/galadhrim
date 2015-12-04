@@ -78,6 +78,9 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 
 	router.route('/api/ocm/waitlist/:id')
 		.delete(waitlist.deleteWaitlist);
+		
+	router.route('/api/ocm/waitlist')
++    		.get(waitlist.find);	
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
