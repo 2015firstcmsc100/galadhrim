@@ -3,7 +3,7 @@ var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/course');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
-var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan-of-study');
+var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
 var grades = require(__dirname + '/../gil-galad/controllers/api/students');
 var employees = require(__dirname + '/../gil-galad/controllers/api/employees');
 var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-record');
@@ -53,7 +53,7 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 	router.route('/api/plan-of-study/:id')
 		.put(plan_of_study.update);
 
-	router.route('/api/plan-of-study')
+	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
 		.post(planOfStudy.insert);
 
 	router.route('/api/students/:id/grades')
