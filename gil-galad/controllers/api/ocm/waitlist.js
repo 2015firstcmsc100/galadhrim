@@ -22,6 +22,18 @@ exports.deleteWaitlist = function(req, res, next) {
     	});
   });
 }
+
+exports.find = function(req, res, next) {
+	db.query("SELECT * FROM waitlist", function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			res.send(404, {message: 'No waitlist found.'});
+		} else {
+			res.send(rows);   //if 200 -- ok
+		}
+	});
+};
+
 var selectOne = function(id, callback) {
 	db.query("SELECT * FROM waitlist WHERE _id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);
