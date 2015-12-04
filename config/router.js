@@ -1,6 +1,6 @@
 var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-program');
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
-var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum-course');
+var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum_course');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/app/courses');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
@@ -11,7 +11,6 @@ var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-r
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
-var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-offerings');
 
  module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -79,9 +78,6 @@ var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-
 
 	router.route('/api/ocm/waitlist/:id')
 		.delete(waitlist.deleteWaitlist);
-
-  router.route('/api/course-offerings')
-    .get(courseOfferings.find);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
