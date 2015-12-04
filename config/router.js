@@ -59,9 +59,6 @@ var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-
   router.route('/api/courses/:id')
     .delete(course.remove);
 
-  router.route('/api/course-offerings')
-    .get(courseOfferings.find);
-
 	router.route('/api/plan-of-study/:id')
 		.put(plan_of_study.update);
 
@@ -82,6 +79,9 @@ var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-
 
 	router.route('/api/ocm/waitlist/:id')
 		.delete(waitlist.deleteWaitlist);
+
+  router.route('/api/course-offerings')
+    .get(courseOfferings.find);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});

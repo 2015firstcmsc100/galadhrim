@@ -6,6 +6,7 @@ var server = supertest.agent('http://localhost:' + config.port);
 var url = '/api/recommended-courses';
 
 describe('Retrieve recommended courses',function(){
+  
   it('should return an array' function(done){
     server.get(url)
       .expect(200)
@@ -27,6 +28,5 @@ describe('Retrieve recommended courses',function(){
         }
       });
   });
-
 
 });
