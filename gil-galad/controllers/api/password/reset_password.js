@@ -1,5 +1,5 @@
 var config  = require(__dirname + '/../../../../config/config'),
-    util    = require(__dirname + '/../../../../lib/util'),
+    util    = require(__dirname + '/../../../../lib/utils'),
     db  	= require(__dirname + '/../../../lib/mysql'),
     mailer  = require('nodemailer');
 
@@ -17,7 +17,7 @@ exports.reset = function(req, res, next){
                 service: 'Gmail',
                 auth: config.email_sender
             });
-                
+
             var mail_options = {
                 from: 'Galadhrim <galadhrim.app@gmail.com>',
                 to: data.email,
@@ -35,5 +35,5 @@ exports.reset = function(req, res, next){
 
             res.send(data.email);
         }
-    });    
+    });
 }

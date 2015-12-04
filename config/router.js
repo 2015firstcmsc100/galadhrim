@@ -2,10 +2,10 @@ var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-progra
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum_course');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
-var course = require(__dirname + '/../gil-galad/controllers/app/courses');
+var courses = require(__dirname + '/../gil-galad/controllers/api/courses');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
-var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
-var grades = require(__dirname + '/../gil-galad/controllers/api/students');
+var plan_of_study = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
+//var grades = require(__dirname + '/../gil-galad/controllers/api/students');
 var employees = require(__dirname + '/../gil-galad/controllers/api/employees');
 var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-record');
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
@@ -56,16 +56,16 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 		.post(courses.insert);
 
   router.route('/api/courses/:id')
-    .delete(course.remove);
+    .delete(courses.remove);
 
 	router.route('/api/plan-of-study/:id')
 		.put(plan_of_study.update);
 
 	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
-		.post(planOfStudy.insert);
+		.post(plan_of_study.insert);
 
-	router.route('/api/students/:id/grades')
-		.get(grades.findstudentGrade);
+	//router.route('/api/students/:id/grades')
+	//	.get(grades.findstudentGrade);
 
 	router.route('/api/employees')
 		.get(employees.findEmployees);

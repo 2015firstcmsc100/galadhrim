@@ -1,5 +1,5 @@
 var logger = require(__dirname + '/../../../lib/logger'),
-    db = require(__dirname + '/../lib/mysql');
+    db = require(__dirname + '/../../lib/mysql');
 
 exports.update = function(req, res, next) {
 	db.query("UPDATE plan_of_study SET isApproved = 'PENDING', previousCourseId = ? WHERE _id = ?",
@@ -21,7 +21,7 @@ exports.insert = function(req, res, next) {
 	if (!req.params.studentId) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: studentId'});
 	}
-	
+
 	db.query("INSERT INTO plan_of_study(courseId, curriculumId, studentId) VALUES(?, ?, ?)", [req.params.courseId, req.params.curriculumId, req.params.studentId], function(err, row) {
 		if (err) return next(err);
 		selectOne(row.insertId, function(newRow) {

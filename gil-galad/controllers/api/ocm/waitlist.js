@@ -6,7 +6,7 @@
 // Client Error, 4xx
 // Returns the error record containing the error message
 
-var logger = require(__dirname + '/../../../lib/logger'),
+var logger = require(__dirname + '/../../../../lib/logger'),
     db = require(__dirname + '/../../../lib/mysql');
 
 

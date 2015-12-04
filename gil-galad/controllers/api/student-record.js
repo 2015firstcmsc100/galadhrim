@@ -1,4 +1,4 @@
-var	logger = require(__dirname + '/../../lib/logger'),
+var	logger = require(__dirname + '/../../../lib/logger'),
     db = require(__dirname + '/../../lib/mysql');				//connecting to database
 
 
@@ -10,5 +10,5 @@ exports.findAStudentRecord = function(req, res, next){
 		}else{
 			res.send(200, rows[0]);		//send retrieved row
 		}
-	});	
+	});
 };

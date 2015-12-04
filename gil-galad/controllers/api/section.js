@@ -1,8 +1,8 @@
-var	logger = require(__dirname + '/../../lib/logger'),
-	db = require(__dirname + '/../lib/mysql');
+var	logger = require(__dirname + '/../../../lib/logger'),
+	db = require(__dirname + '/../../lib/mysql');
 
 
-exports.insert = function(req,res,next){ 
+exports.insert = function(req,res,next){
 	if (!req.body.courseId) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: courseId'});
 	}
@@ -22,17 +22,17 @@ exports.insert = function(req,res,next){
 		return res.send(451, {'error': true, 'message': 'Missing parameter: semester'});
 	}
 
-	 db.query("INSERT INTO section(courseId, name, numberOfStudents, daysLaboratory, daysLecture, daysRecitation, timeLaboratory, timeLecture, timeRecitation, roomLaboratory, roomLecture, roomRecitation, laboratoryInstructor, lectureInstructor, recitationInstructor, daysLaboratory2, daysLecture2, daysRecitation2, timeLaboratory2, timeLecture2, timeRecitation2, roomLaboratory2, roomLecture2, roomRecitation2, unitId, year, semester ) VALUES ( ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?)", 
+	 db.query("INSERT INTO section(courseId, name, numberOfStudents, daysLaboratory, daysLecture, daysRecitation, timeLaboratory, timeLecture, timeRecitation, roomLaboratory, roomLecture, roomRecitation, laboratoryInstructor, lectureInstructor, recitationInstructor, daysLaboratory2, daysLecture2, daysRecitation2, timeLaboratory2, timeLecture2, timeRecitation2, roomLaboratory2, roomLecture2, roomRecitation2, unitId, year, semester ) VALUES ( ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?,?)",
 
-		[req.body.courseId, req.body.name, req.body.numberOfStudents, 
- 		req.body.daysLaboratory, req.body.daysLecture, req.body.daysRecitation, 
- 		req.body.timeLaboratory, req.body.timeLecture, req.body.timeRecitation, 
- 		req.body.roomLaboratory, req.body.roomLecture, req.body.roomRecitation, 
-	 	req.body.laboratoryInstructor, req.body.lectureInstructor, req.body.recitationInstructor, 
-	 	req.body.daysLaboratory2, req.body.daysLecture2, req.body.daysRecitation2, 
-	 	req.body.timeLaboratory2, req.body.timeLecture2, req.body.timeRecitation2, 
-	 	req.body.roomLaboratory2, req.body.roomLecture2, req.body.roomRecitation2, 
-	 	req.body.unitId, req.body.year, req.body.semester], 
+		[req.body.courseId, req.body.name, req.body.numberOfStudents,
+ 		req.body.daysLaboratory, req.body.daysLecture, req.body.daysRecitation,
+ 		req.body.timeLaboratory, req.body.timeLecture, req.body.timeRecitation,
+ 		req.body.roomLaboratory, req.body.roomLecture, req.body.roomRecitation,
+	 	req.body.laboratoryInstructor, req.body.lectureInstructor, req.body.recitationInstructor,
+	 	req.body.daysLaboratory2, req.body.daysLecture2, req.body.daysRecitation2,
+	 	req.body.timeLaboratory2, req.body.timeLecture2, req.body.timeRecitation2,
+	 	req.body.roomLaboratory2, req.body.roomLecture2, req.body.roomRecitation2,
+	 	req.body.unitId, req.body.year, req.body.semester],
 
  	function(err, row){
 	 	if(err) return next(err);
