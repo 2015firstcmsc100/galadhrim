@@ -12,13 +12,13 @@ exports.update = function(req, res, next) {
 };
 
 exports.insert = function(req, res, next) {
-	if (!req.body.courseId) {
+	if (!req.params.courseId) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: courseId'});
 	}
-	if (!req.body.curriculumId) {
+	if (!req.params.curriculumId) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: curriculumId'});
 	}
-	if (!req.body.studentId) {
+	if (!req.params.studentId) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: studentId'});
 	}
 	
