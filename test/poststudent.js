@@ -28,11 +28,11 @@ describe('Posting a student', function(){
                     throw err;
                 }
                 res.should.have.status(200);
-                res.body.should.have.porperty('firstName', 'Marie Betel');
-                res.body.should.have.porperty('middleName', 'B');
-                res.body.should.have.porperty('lastName', 'de Robles');
-                res.body.should.have.porperty('curriculumId', '99999999999');
-                res.body.should.have.porperty('sex', 'F');
+                res.body.should.have.property('firstName', 'Marie Betel');
+                res.body.should.have.property('middleName', 'B');
+                res.body.should.have.property('lastName', 'de Robles');
+                res.body.should.have.property('curriculumId', '99999999999');
+                res.body.should.have.property('sex', 'F');
                 done();
             });
     });
