@@ -1,17 +1,3 @@
-/*
-/api/students
-@param firstName - first name of student
-@param middleName (optional) - middle name of student
-@param lastName - last name of student
-@param curriculumId - curriculum id of the student
-@param sex - sex of the student
-
-OK, 200
-Returns the newly created student record
-Client error, 4xx
-Returns an error record containing the error message
-*/
-
 var supertest = require('supertest');
 var should = require('should-http');
 var config = require('/../config/config');
