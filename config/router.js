@@ -11,6 +11,7 @@ var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-r
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
+var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 
  module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -78,9 +79,12 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 
 	router.route('/api/ocm/waitlist/:id')
 		.delete(waitlist.deleteWaitlist);
-		
+
 	router.route('/api/ocm/waitlist')
-+    		.get(waitlist.find);	
+		.get(waitlist.find);
+
+  router.route('/api/announcements')
+		.post(announcement.insert);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
