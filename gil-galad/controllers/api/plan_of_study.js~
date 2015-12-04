@@ -1,5 +1,5 @@
 var logger = require(__dirname + '/../../../lib/logger'),
-    db = require(__dirname + '/../../lib/mysql');
+    db = require(__dirname + '/../lib/mysql');
 
 exports.update = function(req, res, next) {
 	db.query("UPDATE plan_of_study SET isApproved = 'PENDING', previousCourseId = ? WHERE _id = ?",
