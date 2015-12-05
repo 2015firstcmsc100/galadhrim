@@ -1,0 +1,51 @@
+var logger = require(__dirname + '/../../../lib/logger'),
+    db = require(__dirname + '/../../lib/mysql');
+
+exports.find = function(req, res, next) {
+	db.query("SELECT * FROM course", function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			res.send(404, {message: 'No course found.'});
+		} else {
+			res.send(rows);
+		}
+	});
+};
+
+exports.insert = function(req, res, next) {
+	if (!req.params.code) {
+		return res.send(451, {'error': true, 'message': 'Missing parameter: code'});
+	}
+	if (!req.params.name) {
+		return res.send(451, {'error': true, 'message': 'Missing parameter: name'});
+	}
+	
+	db.query("INSERT INTO course(code, name, units, semesterOffered, unitId) VALUES(?, ?, ?, ?, ?)", 
+		[req.params.code, 
+		 req.params.name, 
+		 req.params.units, 
+		 req.params.semesterOffered, 
+		 req.params.unitId], 
+		 
+		function(err, row) {
+			if (err) return next(err);
+			selectOne(row.insertId, function(newRow) {
+				if (!newRow) {
+					res.send(400, {message: 'Course ('+row.insertId+') was not created.'});
+				} else {
+					res.send(newRow);
+				}
+			});
+	});
+};
+
+var selectOne = function(id, callback) {
+	db.query("SELECT * FROM course WHERE id=? LIMIT 1", [id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			callback(null);
+		} else {
+			callback(rows[0]);
+		}
+	});
+}

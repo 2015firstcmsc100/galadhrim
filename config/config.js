@@ -32,12 +32,17 @@ var path = require('path'),
 				user	: 'galadhrim',
 				pass	: 'lothlori3n'
 			}
-		}
+		},
+
+		email_sender: {
+	        user: 'galadhrim.app@gmail.com',
+	    	pass: 'galadhrim123'
+    	}
 	};
 
 
 // set development as default environment
-!process.env['NODE_ENV'] && (process.env['NODE_ENV'] = 'development');
+!process.env['NODE_ENV'] && (process.env['NODE_ENV'] = 'staging');
 config = config[process.env['NODE_ENV']];
 
 module.exports = config;

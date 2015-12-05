@@ -32,7 +32,7 @@ exports.insert = function(req, res, next) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: degreeProgramId'});
 	}
 	
-	db.query("INSERT INTO curriculum(code, name, degreeProgramId) VALUES(?, ?, ?)", [req.body.code, 		req.body.name, req.body.degreeProgramId], function(err, row) {
+	db.query("INSERT INTO curriculum(code, name, degreeProgramId) VALUES(?, ?, ?)", [req.body.code, req.body.name, req.body.degreeProgramId], function(err, row) {
 		if (err) return next(err);
 		selectOne(row.insertId, function(newRow) {
 			if (!newRow) {

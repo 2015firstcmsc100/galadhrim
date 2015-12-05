@@ -1,5 +1,0 @@
-CREATE TABLE degree_program(
-	id INT(11) PRIMARY KEY AUTO_INCREMENT,
-	code VARCHAR(16) UNIQUE,
-	name VARCHAR(128)
-);
