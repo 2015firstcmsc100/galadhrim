@@ -27,6 +27,8 @@ module.exports = function(router, logger) {
 		.put(curriculum.update)
 		.delete(curriculum.remove);
 	
+	router.route('/rooms')
+		.get(room.find)
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
