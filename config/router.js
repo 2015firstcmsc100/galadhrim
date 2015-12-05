@@ -12,7 +12,7 @@ var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assig
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
-var unit = require(__dirname + '/../gil-galad/controllers/unit');
+var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 
  module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
