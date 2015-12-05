@@ -64,7 +64,7 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
     .put(course.remove);
 
 	router.route('/api/plan-of-study/:id')
-		.get(plan_of_study.find)
+		.get(plan_of_study.findOne)
 		.put(plan_of_study.update);
 
 	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
