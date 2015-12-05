@@ -12,6 +12,7 @@ var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assig
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
+var unit = require(__dirname + '/../gil-galad/controllers/unit');
 
  module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -42,6 +43,9 @@ var announcement = require(__dirname + '/../gil-galad/controllers/api/announceme
 
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses)
+
+	router.route('/api/units/:id')
+		.get(unit.findOne);
 
 	router.route('/api/sections')
  		.post(section.insert);
@@ -92,7 +96,7 @@ var announcement = require(__dirname + '/../gil-galad/controllers/api/announceme
 		.get(degreeProgram.findOne)
 		.put(degreeProgram.update)
 		.delete(degreeProgram.remove);
-	
+
 	router.route('/curriculum')
 		.get(curriculum.find)
 		.post(curriculum.insert);
@@ -101,7 +105,7 @@ var announcement = require(__dirname + '/../gil-galad/controllers/api/announceme
 		.get(curriculum.findOne)
 		.put(curriculum.update)
 		.delete(curriculum.remove);
-	
+
 	router.route('/rooms')
 		.get(room.find)
 =======
