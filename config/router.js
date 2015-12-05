@@ -2,10 +2,10 @@ var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-progra
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum_course');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
-var course = require(__dirname + '/../gil-galad/controllers/app/courses');
+var course = require(__dirname + '/../gil-galad/controllers/api/courses');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
 var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
-var grades = require(__dirname + '/../gil-galad/controllers/api/students');
+//var grades = require(__dirname + '/../gil-galad/controllers/api/students');
 var employees = require(__dirname + '/../gil-galad/controllers/api/employees');
 var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-record');
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
@@ -57,21 +57,21 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 		.get(password.reset);
 
 	router.route('/api/courses')
-		.get(courses.find)
-		.post(courses.insert);
+		.get(course.find)
+		.post(course.insert);
 
   router.route('/api/courses/:id')
     .put(course.remove);
 
 	router.route('/api/plan-of-study/:id')
-		.get(plan_of_study.findOne)
-		.put(plan_of_study.update);
+		.get(planOfStudy.findOne)
+		.put(planOfStudy.update);
 
 	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
 		.post(planOfStudy.insert);
 
 	router.route('/api/students/:id/grades')
-		.get(grades.findstudentGrade);
+	//	.get(grades.findstudentGrade);
 
 	router.route('/api/employees')
 		.get(employees.findEmployees);
@@ -88,7 +88,6 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 	router.route('/api/ocm/waitlist')
 		.get(waitlist.find);
 
-<<<<<<< HEAD
 	router.route('/degree-programs')
 		.get(degreeProgram.find)
 		.post(degreeProgram.insert);
@@ -108,11 +107,10 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 		.delete(curriculum.remove);
 
 	router.route('/rooms')
-		.get(room.find)
-=======
+	//	.get(room.find);
+
   router.route('/api/announcements')
 		.post(announcement.insert);
->>>>>>> c5800d6c2edf348c8909589b728c6592488ff87d
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});

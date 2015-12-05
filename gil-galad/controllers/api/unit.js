@@ -1,5 +1,5 @@
-var logger = require(__dirname + '/../../lib/logger'),
-    db = require(__dirname + '/../lib/mysql');
+var logger = require(__dirname + '/../../../lib/logger'),
+    db = require(__dirname + '/../../lib/mysql');
 
 exports.findOne = function (req, res, next) {
 	db.query("SELECT * FROM unit WHERE id=?", [req.params.id], function(err, rows) {
