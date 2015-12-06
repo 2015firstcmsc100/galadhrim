@@ -107,10 +107,13 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 		.delete(curriculum.remove);
 
 	router.route('/rooms')
-	//	.get(room.find);
+		//.get(room.find);
 
-  router.route('/api/announcements')
+  	router.route('/api/announcements')
+  		.get(announcement.find)
 		.post(announcement.insert);
+	router.route('api/announcements/:id')
+		.get(announcement.findOne);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});

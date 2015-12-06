@@ -40,3 +40,26 @@ var selectOne = function(id, callback) {
 		}
 	});
 }
+
+exports.findOne = function (req, res, next) {
+	db.query("SELECT * FROM announcement WHERE _id=? LIMIT 1", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			res.status(404);
+			res.send({message: 'Announcement not found.'});
+		} else {
+			res.status(200);
+			res.send(rows[0]);
+		}
+	});
+}
+
+exports.find = function (req, res, next) {
+	db.query("SELECT * FROM announcement ",  function(err, rows) {
+		if (err) return next(err);
+		 else {
+			res.status(200);
+			res.send(rows);
+		}
+	});
+}
