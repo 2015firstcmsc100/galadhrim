@@ -2,7 +2,7 @@ var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-progra
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum_course');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
-var course = require(__dirname + '/../gil-galad/controllers/app/courses');
+var course = require(__dirname + '/../gil-galad/controllers/api/courses');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
 var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
 var grades = require(__dirname + '/../gil-galad/controllers/api/students');
@@ -88,7 +88,6 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 	router.route('/api/ocm/waitlist')
 		.get(waitlist.find);
 
-<<<<<<< HEAD
 	router.route('/degree-programs')
 		.get(degreeProgram.find)
 		.post(degreeProgram.insert);
@@ -108,11 +107,10 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 		.delete(curriculum.remove);
 
 	router.route('/rooms')
-		.get(room.find)
-=======
+		.get(room.find);
+		
   router.route('/api/announcements')
 		.post(announcement.insert);
->>>>>>> c5800d6c2edf348c8909589b728c6592488ff87d
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
