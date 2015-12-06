@@ -1,6 +1,7 @@
 var logger = require(__dirname + '/../../../lib/logger'),
     db = require(__dirname + '/../../lib/mysql');
 
+
 exports.find = function(req, res, next) {
 	db.query("SELECT * FROM course", function(err, rows) {
 		if (err) return next(err);
@@ -11,6 +12,7 @@ exports.find = function(req, res, next) {
 		}
 	});
 };
+
 
 exports.insert = function(req, res, next) {
 	if (!req.body.code) {

@@ -57,8 +57,8 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 		.get(password.reset);
 
 	router.route('/api/courses')
-		.get(courses.find)
-		.post(courses.insert);
+		.get(course.find)
+		.post(course.insert);
 
   router.route('/api/courses/:id')
     .put(course.remove);
