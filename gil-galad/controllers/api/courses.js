@@ -40,7 +40,7 @@ exports.insert = function(req, res, next) {
 };
 
 var selectOne = function(id, callback) {
-	db.query("SELECT * FROM course WHERE id=? LIMIT 1", [id], function(err, rows) {
+	db.query("SELECT * FROM course WHERE _id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			callback(null);
