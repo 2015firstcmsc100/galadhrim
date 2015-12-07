@@ -4,11 +4,7 @@ var logger = require(__dirname + '/../../lib/logger'),
 exports.find = function(req, res, next) {
 	db.query("SELECT * FROM curriculum", function(err, rows) {
 		if (err) return next(err);
-		if (rows.length === 0) {
-			res.send(404, {message: 'Curriculum not found.'});
-		} else {
 			res.send(rows);
-		}
 	});
 };
 

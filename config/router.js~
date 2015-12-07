@@ -1,6 +1,7 @@
 var degreeProgram = require(__dirname + '/../gil-galad/controllers/degree-program');
 var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum_course');
+var curricula = require(__dirname + '/../gil-galad/controllers/api/curricula');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/api/courses');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
@@ -14,9 +15,8 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
-var curricula = require(__dirname + '/../gil-galad/controllers/api/curricula');
 
- module.exports = function(router, logger) {
+module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
  		logger.log('verbose', req.method);
  		logger.log('verbose', req.params);
@@ -44,11 +44,11 @@ var curricula = require(__dirname + '/../gil-galad/controllers/api/curricula');
  		.delete(curriculum.remove);
 
  	router.route('/api/curriculum-course/:id')
- 		.get(curriculum_course.findCourses)
+ 		.get(curriculum_course.findCourses);
  	
  	router.route('/api/curricula')
- 		.get(curricula.find)
-
+ 		.get(curricula.find);
+ 		
 	router.route('/api/units/:id')
 		.get(unit.findOne);
 
