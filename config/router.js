@@ -39,7 +39,7 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
  	router.route('/curriculum/:id')
  		.get(curriculum.findOne)
  		.put(curriculum.update)
- 		.delete(curriculum.remove);
+ 		.put(curriculum.remove);
 
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses)

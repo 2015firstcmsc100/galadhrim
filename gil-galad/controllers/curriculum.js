@@ -11,7 +11,7 @@ exports.find = function(req, res, next) {
 
 
 exports.findOne = function(req, res, next) {
-	db.query("SELECT * FROM curriculum WHERE id=?", [req.params.id], function(err, rows) {
+	db.query("SELECT * FROM curriculum WHERE _id=?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			res.send(404, {message: 'Curriculum not found.'});
@@ -60,12 +60,14 @@ exports.update = function(req, res, next) {
 
 
 exports.remove = function(req, res, next) {
-	db.query("DELETE FROM curriculum WHERE _id=?", [req.params.id], function(err, row) {
+	db.query("UPDATE curriculum SET _recStatus='Deleted' WHERE _id=?", [req.params.id], function(err, row) {
 		if (err) return next(err);
 		if (row.affectedRows === 0) {
-			res.send(554, {message: 'Curriculum ('+req.params.id+') was not removed.'});
-		} else {
-			res.send(202, row);
+			res.send(400, {message: 'Curriculum ('+req.params.id+') was not removed.'});
+		} else{
+			selectOne(req.params.id, function(updatedRow){
+				res.status(202).send(updatedRow);
+			});
 		}
 		
 	});
