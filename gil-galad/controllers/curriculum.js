@@ -1,14 +1,16 @@
 var logger = require(__dirname + '/../../lib/logger'),
      db = require(__dirname + '/../lib/mysql');
 
-
 exports.find = function(req, res, next) {
 	db.query("SELECT * FROM curriculum", function(err, rows) {
 		if (err) return next(err);
-		res.send(rows);
+		if (rows.length === 0) {
+			res.send(404, {message: 'Curriculum not found.'});
+		} else {
+			res.send(rows);
+		}
 	});
 };
-
 
 exports.findOne = function(req, res, next) {
 	db.query("SELECT * FROM curriculum WHERE _id=?", [req.params.id], function(err, rows) {

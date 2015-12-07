@@ -14,6 +14,7 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
+var curricula = require(__dirname + '/../gil-galad/controllers/api/curricula');
 
  module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -44,6 +45,9 @@ var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/pro
 
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses)
+ 	
+ 	router.route('/api/curricula')
+ 		.get(curricula.find)
 
 	router.route('/api/units/:id')
 		.get(unit.findOne);
