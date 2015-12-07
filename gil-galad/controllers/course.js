@@ -6,7 +6,8 @@ exports.find = function(req, res, next) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			res.send(404, {message: 'No course found.'});
-		} else {
+		} 
+		else {
 			res.send(rows);
 		}
 	});
