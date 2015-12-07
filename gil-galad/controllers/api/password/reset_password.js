@@ -1,7 +1,7 @@
 var config  = require(__dirname + '/../../../../config/config'),
     util    = require(__dirname + '/../../../../lib/utils'),
     db  	= require(__dirname + '/../../../lib/mysql'),
-    mailer  = require('node-mailer');
+     mailer  = require('node-mailer');
 
 
 exports.reset = function(req, res, next){
