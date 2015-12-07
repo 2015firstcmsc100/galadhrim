@@ -39,7 +39,7 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
  	router.route('/curriculum/:id')
  		.get(curriculum.findOne)
  		.put(curriculum.update)
- 		.put(curriculum.remove);
+ 		.delete(curriculum.remove);
 
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses)
@@ -87,24 +87,6 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 
 	router.route('/api/ocm/waitlist')
 		.get(waitlist.find);
-
-	router.route('/degree-programs')
-		.get(degreeProgram.find)
-		.post(degreeProgram.insert);
-
-	router.route('/degree-programs/:id')
-		.get(degreeProgram.findOne)
-		.put(degreeProgram.update)
-		.delete(degreeProgram.remove);
-
-	router.route('/curriculum')
-		.get(curriculum.find)
-		.post(curriculum.insert);
-
-	router.route('/curriculum/:id')
-		.get(curriculum.findOne)
-		.put(curriculum.update)
-		.delete(curriculum.remove);
 
 	router.route('/rooms')
 		//.get(room.find);
