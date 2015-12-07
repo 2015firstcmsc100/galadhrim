@@ -61,7 +61,7 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 		.post(course.insert);
 
   router.route('/api/courses/:id')
-    .put(course.remove);
+    	.put(course.remove);
 
 	router.route('/api/plan-of-study/:id')
 		.get(planOfStudy.findOne)
@@ -69,6 +69,9 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 
 	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
 		.post(planOfStudy.insert);
+
+	router.route('/api/student')
+		.post(studentRecord.createStudentRecord);
 
 	router.route('/api/students/:id/grades')
 	//	.get(grades.findstudentGrade);
