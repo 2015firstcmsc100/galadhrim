@@ -13,6 +13,7 @@ var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist')
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
+var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
 
  module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -52,6 +53,9 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
+
+	router.route('/api/user/profile-picture/:id')
+		.put(profilePicture.update);
 
 	router.route('/api/password/reset/:id')
 		.get(password.reset);
