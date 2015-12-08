@@ -80,7 +80,7 @@ module.exports = function(router, logger) {
 	router.route('/api/course-offerings')
 		.get(courseOfferings.find);	
 		
-	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
+	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
 
 	router.route('/api/students/:id/grades')
