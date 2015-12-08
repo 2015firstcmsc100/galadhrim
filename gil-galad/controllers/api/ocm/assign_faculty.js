@@ -14,6 +14,9 @@ exports.update = function(req, res, next) {
 	}else if(req.body.recitationInstructor!==undefined){
 		column = 'recitationInstructor';
 		value = req.body.recitationInstructor;
+	}else{
+
+		res.send(404, {message: 'Request is not valid'});
 	}
 
 	db.query("UPDATE section SET "+column+" = "+value+", _updated = now() WHERE _id = ?", [req.params.id], function(err, rows) {
