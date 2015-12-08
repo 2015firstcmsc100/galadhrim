@@ -20,6 +20,7 @@ var section_grades = require(__dirname + '/../gil-galad/controllers/api/section_
 var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/log');
 //var recommended_courses =  require(__dirname + '/../gil-galad/controllers/api/recommended-courses');
 var student_grades = require(__dirname + '/../gil-galad/controllers/api/grade');
+var department = require(__dirname + '/../gil-galad/controllers/api/departments/');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -63,6 +64,9 @@ module.exports = function(router, logger) {
 	router.route('/api/units/:id')
 		.get(unit.findOne)
                 .delete(unit.remove);
+                
+        router.rout('/api/department')
+        	.get(department.find)
 
 	router.route('/api/sections')
  		.post(section.insert);
@@ -124,6 +128,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/monitoring/logs/:id')
 		.get(monitoring.findOne);
+		
+	router.route('/api/departments')
+		.get(department.find);
 		
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
