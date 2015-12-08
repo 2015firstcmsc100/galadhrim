@@ -23,6 +23,8 @@ var student_grades = require(__dirname + '/../gil-galad/controllers/api/grade');
 var department = require(__dirname + '/../gil-galad/controllers/api/departments');
 var room = require(__dirname + '/../gil-galad/controllers/api/room');
 var change_password = require(__dirname + '/../gil-galad/controllers/api/password/change_password');
+var tcg = require(__dirname + '/../gil-galad/controllers/api/tcg');
+
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
  		logger.log('verbose', req.method);
@@ -143,6 +145,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/rooms/:id')
 		.get(room.findOne);
+		
+	router.route('/api/tcg')
+		.post(tcg.request);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
