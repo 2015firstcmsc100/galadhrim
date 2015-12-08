@@ -50,7 +50,7 @@ var selectOne = function(id, callback) {
 			callback(rows[0]);
 		}
 	});
-}
+};
 
 exports.remove = function(req, res, next) {
   db.query("UPDATE course SET _recStatus ='Deleted' WHERE _id=?", [req.params.id], function(err, row) {
