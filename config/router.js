@@ -16,6 +16,7 @@ var announcement = require(__dirname + '/../gil-galad/controllers/api/announceme
 var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-offerings');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
+var section_grades = require(__dirname + '/../gil-galad/controllers/api/section_grade');
 var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/log');
 var recommended_courses =  require(__dirname + '/../gil-galad/controllers/api/recommended-courses');
 
@@ -27,6 +28,9 @@ module.exports = function(router, logger) {
  		logger.log('verbose', req.body);
  		next();
  	});
+
+	router.route('/api/sections/:id/grades')
+ 		.get(section_grades.find);
 
  	router.route('/degree-programs')
  		.get(degreeProgram.find)
