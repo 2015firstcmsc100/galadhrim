@@ -85,7 +85,7 @@ module.exports = function(router, logger) {
 		.post(course.insert);
 
   router.route('/api/courses/:id')
-    .put(course.remove);
+    	.put(course.remove);
 
 	router.route('/api/plan-of-study/:id')
 		.get(planOfStudy.findOne)
@@ -96,6 +96,9 @@ module.exports = function(router, logger) {
 		
 	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
+
+	router.route('/api/student')
+		.post(studentRecord.createStudentRecord);
 
 	router.route('/api/students/:id/grades')
 	//	.get(grades.findstudentGrade);
