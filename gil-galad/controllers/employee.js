@@ -6,7 +6,7 @@ exports.update = function(req, res, next) {
 		if (err) return next(err);
 		selectOne(req.params.id, function(updated) {
 			if (!updated) {
-				res.send(553, {message: 'Update Unsuccessfull'});
+				res.send(400, {message: 'Update Unsuccessfull'});
 			} else {
 				res.send(updatedRow);
 			}

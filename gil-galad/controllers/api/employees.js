@@ -10,3 +10,37 @@ exports.findEmployees = function(req, res, next) {
 		}
 	});
 };
+
+exports.insert = function(req, res, next) {
+	if (!req.body.firstName) {
+		return res.send(451, {'error': true, 'message': 'Missing parameter: firstName'});
+	}
+	if (!req.body.lastName) {
+		return res.send(451, {'error': true, 'message': 'Missing parameter: lastName'});
+	}
+	if (!req.body.unitId) {
+		return res.send(451, {'error': true, 'message': 'Missing parameter: unitId'});
+	}
+	
+	db.query("INSERT INTO employee (firstName, middleName, lastName, unitId) VALUES(?, ?, ?, ?)", [req.body.firstName, req.body.middleName, req.body.lastName, req.body.unitId], function(err, row) {
+		if (err) return next(err);
+		selectOne(row.insertId, function(newRow) {
+			if (!newRow) {
+				res.send(400, {message: 'Employee (' + row.insertId + ') was not created.'});
+			} else {
+				res.send(newRow);
+			}
+		});
+	});
+};
+
+var selectOne = function(id, callback) {
+	db.query("SELECT * FROM employee WHERE _id=? LIMIT 1", [id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			callback(null);
+		} else {
+			callback(rows[0]);
+		}
+	});
+};
