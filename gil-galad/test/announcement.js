@@ -30,8 +30,8 @@ describe('announcement', function() {
 		it('should create new announcement: no description', function (done) {
 			var announcement = {
 				'_id': randomizedCode,
-				'title': 'CMSC 100 project submission'
-				'datePosted':'2015/12/05'
+				'title': 'CMSC 100 project submission',
+				'datePosted':'2015/12/05',
 				'expiryDate':'2015/12/05'
 			};
 			request(url)
@@ -47,4 +47,19 @@ describe('announcement', function() {
 					done();
 				});
 		});
+	});
+	
+	describe('find()', function () {
+		it('should retrieve all announcement records', function (done) {
+			request(url)
+				.get('api/announcements')
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+	});
 });
