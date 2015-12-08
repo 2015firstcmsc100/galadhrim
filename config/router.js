@@ -15,6 +15,7 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
+var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/log');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -106,6 +107,9 @@ module.exports = function(router, logger) {
 		.get(announcement.findOne)
 		.delete(announcement.remove);
 
+	router.route('/api/monitoring/logs/:id')
+		.get(monitoring.findOne);
+		
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
 	});
