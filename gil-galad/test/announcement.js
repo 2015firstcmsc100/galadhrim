@@ -49,16 +49,30 @@ describe('announcement', function() {
 		});
 	});
 	
-	describe('find()', function () {
-		it('should retrieve all announcement records', function (done) {
+	describe('findOne()', function () {
+		it('should retrieve a specific announcement record', function (done) {
 			request(url)
-				.get('api/announcements')
+				.get('/announcements/' + insertedId)
 				.end(function(err, res) {
 					if (err) {
 						throw err;
 					}
 					res.should.have.status(200);
 					done();
+				});
+		});
+
+
+		it('should return error trying to retrieve an announcement record that does not exist', function (done) {
+			request(url)
+				.get('/announcements/0')
+				.end(function(err, res) {
+					if (err) {
+						done();
+					}
+					else {
+						throw new Error({'message': 'Able to retrieve a non-existent announcement'});
+					}
 				});
 		});
 	});
