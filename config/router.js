@@ -17,6 +17,7 @@ var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
 var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/log');
+var recommended_courses =  require(__dirname + '/../gil-galad/controllers/api/recommended-courses');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
