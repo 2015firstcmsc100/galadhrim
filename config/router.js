@@ -22,7 +22,7 @@ var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/l
 var student_grades = require(__dirname + '/../gil-galad/controllers/api/grade');
 var department = require(__dirname + '/../gil-galad/controllers/api/departments');
 var room = require(__dirname + '/../gil-galad/controllers/api/room');
-
+var change_password = require(__dirname + '/../gil-galad/controllers/api/password/change_password');
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
  		logger.log('verbose', req.method);
@@ -80,6 +80,8 @@ module.exports = function(router, logger) {
 
 	router.route('/api/password/reset/:id')
 		.get(password.reset);
+	router.route('/api/password/change/:id')
+		.get(change_password.change);
 
 	router.route('/api/courses')
 		.get(course.find)
