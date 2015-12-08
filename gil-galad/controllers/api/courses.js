@@ -64,3 +64,20 @@ exports.remove = function(req, res, next) {
 		}
   });
 };
+
+exports.update = function(req, res, next) {
+	db.query("UPDATE course SET ? WHERE _id=?", [req.body, req.params.id], function(err, rows) {
+		if (err) return next(err);
+		selectOne(req.params.id, function(updatedRow) {
+
+			if (updatedRow == null) {
+				res.send(404, {message: 'Course ('+req.params.id+') was not found.'});
+			}
+			if (!updatedRow) {
+				res.send(400, {message: 'Course ('+req.params.id+') was not updated.'});
+			} else {
+				res.send(updatedRow);
+			}
+		});
+	});
+};

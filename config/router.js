@@ -89,7 +89,8 @@ module.exports = function(router, logger) {
 		.post(course.insert);
 
 	router.route('/api/courses/:id')
-  	.delete(course.remove);
+  		.delete(course.remove)
+  		.put(course.update);
 
 	router.route('/api/plan-of-study/:id')
 		.get(planOfStudy.findOne)
