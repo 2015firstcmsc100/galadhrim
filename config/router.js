@@ -107,7 +107,10 @@ module.exports = function(router, logger) {
 	router.route('/api/employees')
 		.get(employees.findEmployees)
 		.post(employees.insert);
-
+	
+	router.route('/api/employees/:id')
+		.get(employees.findOne)
+		
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
 
