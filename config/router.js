@@ -77,7 +77,7 @@ module.exports = function(router, logger) {
 		.put(planOfStudy.update);
 	
 	router.route('/api/course-offerings')
-		.get(courseOfferings.find);
+		.get(courseOfferings.find);	
 		
 	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
 		.post(planOfStudy.insert);
