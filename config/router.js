@@ -18,7 +18,8 @@ var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
 var section_grades = require(__dirname + '/../gil-galad/controllers/api/section_grade');
 var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/log');
-var recommended_courses =  require(__dirname + '/../gil-galad/controllers/api/recommended-courses');
+//var recommended_courses =  require(__dirname + '/../gil-galad/controllers/api/recommended-courses');
+var student_grades = require(__dirname + '/../gil-galad/controllers/api/grade');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -29,6 +30,9 @@ module.exports = function(router, logger) {
  		next();
  	});
 
+	router.route('/api/grades/:id')
+ 		.delete(student_grades.remove);	
+	
 	router.route('/api/sections/:id/grades')
  		.get(section_grades.find);
 
