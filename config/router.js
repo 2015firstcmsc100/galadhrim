@@ -33,8 +33,8 @@ module.exports = function(router, logger) {
  	});
 
 	router.route('/api/grades/:id')
- 		.delete(student_grades.remove);	
-	
+ 		.delete(student_grades.remove);
+
 	router.route('/api/sections/:id/grades')
  		.get(section_grades.find);
 
@@ -58,14 +58,14 @@ module.exports = function(router, logger) {
 
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses);
- 	
+
  	router.route('/api/curricula')
  		.get(curricula.find);
- 		
+
 	router.route('/api/units/:id')
 		.get(unit.findOne)
         .delete(unit.remove);
-                
+
     router.route('/api/department')
        	.get(department.find)
 
@@ -85,16 +85,16 @@ module.exports = function(router, logger) {
 		.get(course.find)
 		.post(course.insert);
 
-  	router.route('/api/courses/:id')
-    	.put(course.remove);
+	router.route('/api/courses/:id')
+  	.delete(course.remove);
 
 	router.route('/api/plan-of-study/:id')
 		.get(planOfStudy.findOne)
 		.put(planOfStudy.update);
-	
+
 	router.route('/api/course-offerings')
-		.get(courseOfferings.find);	
-		
+		.get(courseOfferings.find);
+
 	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
 
@@ -120,14 +120,14 @@ module.exports = function(router, logger) {
   	router.route('/api/announcements')
   		.get(announcement.find)
 		.post(announcement.insert);
-		
+
 	router.route('/api/announcements/:id')
 		.get(announcement.findOne)
 		.delete(announcement.remove);
 
 	router.route('/api/monitoring/logs/:id')
 		.get(monitoring.findOne);
-		
+
 	router.route('/api/departments')
 		.get(department.find);
 
@@ -136,7 +136,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/rooms/:id')
 		.get(room.findOne);
-		
+
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
 	});

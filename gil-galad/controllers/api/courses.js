@@ -53,12 +53,14 @@ var selectOne = function(id, callback) {
 }
 
 exports.remove = function(req, res, next) {
-  db.query("UPDATE FROM course SET _recStatus = 'INACTIVE' WHERE _id=?", [req.params.id], function(err, row) {
+  db.query("UPDATE course SET _recStatus ='Deleted' WHERE _id=?", [req.params.id], function(err, row) {
     if (err) return next(err);
     if (row.length === 0) {
       res.send(404, {message: 'Course ('+req.params.id+') was not removed.'})
-    } else {
-      res.send(200, row[0]);
-    }
+    } else{
+			selectOne(req.params.id, function(updatedRow){
+				res.status(202).send(updatedRow);
+			});
+		}
   });
 };
