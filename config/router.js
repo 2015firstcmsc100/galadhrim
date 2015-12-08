@@ -13,6 +13,7 @@ var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assig
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
+var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-offerings');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
 var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/log');
@@ -75,7 +76,10 @@ module.exports = function(router, logger) {
 	router.route('/api/plan-of-study/:id')
 		.get(planOfStudy.findOne)
 		.put(planOfStudy.update);
-
+	
+	router.route('/api/course-offerings')
+		.get(courseOfferings.find);	
+		
 	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
 		.post(planOfStudy.insert);
 
