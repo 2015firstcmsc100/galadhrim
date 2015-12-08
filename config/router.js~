@@ -80,14 +80,15 @@ module.exports = function(router, logger) {
 	router.route('/api/course-offerings')
 		.get(courseOfferings.find);	
 		
-	router.route('/api/plan-of-study/:courseId/:curriculumId/:studentId')
+	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
 
 	router.route('/api/students/:id/grades')
 	//	.get(grades.findstudentGrade);
 
 	router.route('/api/employees')
-		.get(employees.findEmployees);
+		.get(employees.findEmployees)
+		.post(employees.insert);
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
@@ -112,7 +113,7 @@ module.exports = function(router, logger) {
 		.delete(announcement.remove);
 
 	router.route('/api/monitoring/logs/:id')
-		.get(monitoring.retrieveLog);
+		.get(monitoring.findOne);
 		
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});

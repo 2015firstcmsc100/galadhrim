@@ -87,7 +87,8 @@ module.exports = function(router, logger) {
 	//	.get(grades.findstudentGrade);
 
 	router.route('/api/employees')
-		.get(employees.findEmployees);
+		.get(employees.findEmployees)
+		.post(employees.insert);
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
