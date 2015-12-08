@@ -15,6 +15,7 @@ var section = require(__dirname + '/../gil-galad/controllers/api/section');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
 var profilePicture = require(__dirname + '/../gil-galad/controllers/api/user/profile-picture');
+var section_grades = require(__dirname + '/../gil-galad/controllers/api/section_grade');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -24,6 +25,9 @@ module.exports = function(router, logger) {
  		logger.log('verbose', req.body);
  		next();
  	});
+
+	router.route('/api/sections/:id/grades')
+ 		.get(section_grades.find);
 
  	router.route('/degree-programs')
  		.get(degreeProgram.find)
