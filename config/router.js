@@ -102,8 +102,9 @@ module.exports = function(router, logger) {
   	router.route('/api/announcements')
   		.get(announcement.find)
 		.post(announcement.insert);
-	router.route('api/announcements/:id')
-		.get(announcement.findOne);
+	router.route('/api/announcements/:id')
+		.get(announcement.findOne)
+		.delete(announcement.remove);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
