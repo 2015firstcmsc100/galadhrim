@@ -30,4 +30,33 @@ describe('StudentGrade', function(){
 		});
 
 	});
+	
+	describe('remove()', function () {
+		it('should delete a specific grade record', function (done) {
+			request(url)
+				.delete('/api/grades/:' + insertedId)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+
+		it('should return error trying to remove a grade record that does not exist', function (done) {
+			request(url)
+				.delete('/api/grades/:0')
+				.end(function(err, res) {
+					if (err) {
+						done();
+					}
+					else {
+						throw new Error({'message': 'grade does not exist'});
+					}
+				});
+		});
+	});
+	
 });
