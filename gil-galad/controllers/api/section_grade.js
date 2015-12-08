@@ -2,7 +2,7 @@ var logger = require(__dirname + '/../../../lib/logger'),
     db = require(__dirname + '/../../lib/mysql');
 
 exports.find = function(req, res, next) {
-	db.query("SELECT * FROM grades WHERE sectionId = ?" , 
+	db.query("SELECT * FROM grade WHERE sectionId = ?" , 
 		[req.params.id], 
 
 		function(err, rows) {
