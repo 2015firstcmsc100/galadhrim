@@ -50,9 +50,9 @@
 
 		/*
 		$scope.editUnit - contains the updated unit
-		$scope.editUnit - function that calls to service to edit unit
+		$scope.EditUnit - function that calls to service to edit unit
 		*/
-		$scope.editUnit = function (unitId) {
+		$scope.EditUnit = function (unitId) {
 			// Assuming ng-models are already checked if empty
 			UnitService.updateUnit($scope.editUnit, unitId)
 			.then(function (data) {
