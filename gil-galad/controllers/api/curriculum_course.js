@@ -8,4 +8,16 @@ var	logger = require(__dirname + '/../../../lib/logger'),
  			res.send(200, rows);
  		}
  	});	
- } 
+ };
+ 
+ exports.remove = function(req, res, next) {
+  db.query("UPDATE curriculum_course SET _recStatus ='Deleted' WHERE _id=?", [req.params.id], function(err, row) {
+    if (err) return next(err);
+    if (row.length === 0) {
+      res.send(404, {message: 'Course in curriculum ('+req.params.id+') was not removed.'})
+    }
+    else {
+      res.send(200, row[0]);
+	}
+  });
+};

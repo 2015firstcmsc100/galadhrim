@@ -57,7 +57,8 @@ module.exports = function(router, logger) {
  		.delete(curriculum.remove);
 
  	router.route('/api/curriculum-course/:id')
- 		.get(curriculum_course.findCourses);
+ 		.get(curriculum_course.findCourses)
+ 		.delete(curriculum_course.remove);
 
  	router.route('/api/curricula')
  		.get(curricula.find);
