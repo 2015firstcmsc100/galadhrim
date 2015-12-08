@@ -21,6 +21,7 @@ var monitoring = require(__dirname + '/../gil-galad/controllers/api/monitoring/l
 //var recommended_courses =  require(__dirname + '/../gil-galad/controllers/api/recommended-courses');
 var student_grades = require(__dirname + '/../gil-galad/controllers/api/grade');
 var department = require(__dirname + '/../gil-galad/controllers/api/departments');
+var room = require(__dirname + '/../gil-galad/controllers/api/room');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -116,9 +117,6 @@ module.exports = function(router, logger) {
 	router.route('/api/ocm/waitlist')
 		.get(waitlist.find);
 
-	router.route('/rooms')
-		//.get(room.find);
-
   	router.route('/api/announcements')
   		.get(announcement.find)
 		.post(announcement.insert);
@@ -132,6 +130,12 @@ module.exports = function(router, logger) {
 		
 	router.route('/api/departments')
 		.get(department.find);
+
+	router.route('/api/rooms/')
+		.get(room.find);
+
+	router.route('/api/rooms/:id')
+		.get(room.findOne);
 		
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
