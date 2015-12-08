@@ -61,7 +61,8 @@ module.exports = function(router, logger) {
  		.get(curricula.find);
  		
 	router.route('/api/units/:id')
-		.get(unit.findOne);
+		.get(unit.findOne)
+                .delete(unit.remove);
 
 	router.route('/api/sections')
  		.post(section.insert);
