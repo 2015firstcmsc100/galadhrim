@@ -8,8 +8,10 @@ exports.find = function(req, res, next) {
 		function(err, rows) {
 			if (err) return next(err);
 			
-			if (rows.length === 0) res.send(404, {message: 'Section not found.' + err});
-			
-			res.send(rows);
+			if (rows.length === 0) {
+				res.send(404, {message: 'Section not found. ' + err});
+			}else{
+				res.send(rows);
+			}
 		});
 };	
