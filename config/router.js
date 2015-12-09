@@ -3,8 +3,8 @@ var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum_course');
 var curricula = require(__dirname + '/../gil-galad/controllers/api/curricula');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
-var cancel = require(__dirname + '/../gil-galad/controllers/api/ocm/cancel');
 var course = require(__dirname + '/../gil-galad/controllers/api/courses');
+var login = require(__dirname + '/../gil-galad/controllers/api/login/login');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
 var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
 //var grades = require(__dirname + '/../gil-galad/controllers/api/students');
@@ -25,6 +25,7 @@ var department = require(__dirname + '/../gil-galad/controllers/api/departments'
 var room = require(__dirname + '/../gil-galad/controllers/api/room');
 var change_password = require(__dirname + '/../gil-galad/controllers/api/password/change_password');
 var tcg = require(__dirname + '/../gil-galad/controllers/api/tcg');
+var cancel = require(__dirname + '/../gil-galad/controllers/api/ocm/cancel');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -68,20 +69,31 @@ module.exports = function(router, logger) {
 
 	router.route('/api/units/:id')
 		.get(unit.findOne)
-        .delete(unit.remove);
+        .delete(unit.remove)
+        .put(unit.update);
 
     router.route('/api/department')
        	.get(department.find)
 
 	router.route('/api/sections')
  		.post(section.insert);
+ 	
+ 	router.route('/api/sections/:id')
+ 		.put(section.update);
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
+<<<<<<< HEAD
 	
 	router.route('/api/ocm/cancel/:id')
 		.put(cancel.update);
 		
+=======
+
+  router.route('/api/login')
+    .post(login.login);
+
+>>>>>>> 7e48e02d09cff9def600036bceff056da00aec8c
 	router.route('/api/user/profile-picture/:id')
 		.put(profilePicture.update);
 
@@ -114,10 +126,10 @@ module.exports = function(router, logger) {
 	router.route('/api/employees')
 		.get(employees.findEmployees)
 		.post(employees.insert);
-	
+
 	router.route('/api/employees/:id')
 		.get(employees.findOne)
-		
+
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
 
@@ -149,7 +161,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/rooms/:id')
 		.get(room.findOne);
-		
+
 	router.route('/api/tcg')
 		.post(tcg.request);
 

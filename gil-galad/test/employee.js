@@ -22,9 +22,9 @@ describe('employee',function(){
 	});
 
 	describe('update()', function () {
-		it('should update a specific employee: firstName field only', function (done) {
+		it('should update a specific employee: first name field only', function (done) {
 			var update = {
-				'firstName': 'Marie Betel (edited)',
+				'firstName': 'Marie Betel (edited)'
 			}; 
 			request(url)
 				.put('api/employees/' + insertedId)
@@ -37,13 +37,15 @@ describe('employee',function(){
 						res.should.have.status(200);
 						res.body.should.have.property('firstName', 'Marie Betel (edited)');
 						res.body.should.have.property('lastName', 'de Robles');
+						res.body.should.have.property('unitId', 12345);
+
 						done();
 					}
 				});
 		});
 
 
-		it('should update a specific employee: name lastName only', function (done) {
+		it('should update a specific employee: last name field only', function (done) {
 			var update = {
 				'lastName': 'de Robles (edited)'
 			};
@@ -58,6 +60,30 @@ describe('employee',function(){
 						res.should.have.status(200);
 						res.body.should.have.property('firstName', 'Marie Betel (edited)');
 						res.body.should.have.property('lastName', 'de Robles (edited)');
+						res.body.should.have.property('unitId', 12345);
+
+						done();
+					}
+				});
+		});
+
+		it('should update a specific employee: unit id field only', function (done) {
+			var update = {
+				'unitId': 12345
+			};
+			request(url)
+				.put('api/employees/' + insertedId)
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					else {
+						res.should.have.status(200);
+						res.body.should.have.property('firstName', 'Marie Betel (edited)');
+						res.body.should.have.property('lastName', 'de Robles (edited)');
+						res.body.should.have.property('unitId', 12345);
+						
 						done();
 					}
 				});
@@ -67,7 +93,8 @@ describe('employee',function(){
 		it('should update a specific employee', function (done) {
 			var update = {
 				'firstName': 'Marie Betel',
-				'lastName': 'de Robles'
+				'lastName': 'de Robles',
+				'unitId': 12345
 			};
 			request(url)
 				.put('api/employees/' + insertedId)
@@ -79,6 +106,8 @@ describe('employee',function(){
 					res.should.have.status(200);
 					res.body.should.have.property('firstName', 'Marie Betel');
 					res.body.should.have.property('lastName', 'de Robles');
+					res.body.should.have.property('unitId', 12345);
+					
 					done();
 				});
 		});
@@ -87,7 +116,8 @@ describe('employee',function(){
 		it('should return error trying to update a employee that does not exist', function (done) {
 			var update = {
 				'firstName': 'Marie Betel (edited)',
-				'lastName': 'de Robles (edited)'
+				'lastName': 'de Robles (edited)',
+				'unitId': 12345
 			};
 			request(url)
 				.put('api/employees/' + insertedId)
