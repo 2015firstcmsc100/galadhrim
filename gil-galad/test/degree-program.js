@@ -141,7 +141,7 @@ describe('Degree Program', function() {
 					}
 					else {
 						res.should.have.status(200);
-						res.body.should.have.property('code', randomizedCode + '(edited)');
+						res.body.should.have.property('code', randomizedCode + ' (edited)');
 						res.body.should.have.property('name', 'BS Computer Science');
 						done();
 					}
@@ -162,8 +162,8 @@ describe('Degree Program', function() {
 					}
 					else {
 						res.should.have.status(200);
-						res.body.should.have.property('code', randomizedCode + '(edited)');
-						res.body.should.have.property('name', 'BS Computer Science(edited)');
+						res.body.should.have.property('code', randomizedCode + ' (edited)');
+						res.body.should.have.property('name', 'BS Computer Science (edited)');
 						done();
 					}
 				});
@@ -192,18 +192,18 @@ describe('Degree Program', function() {
 
 		it('should return error trying to update a degree program record that does not exist', function (done) {
 			var update = {
-				'code': randomizedCode + '(edited)',
-				'name': 'BS Computer Science(edited)'
+				'code': randomizedCode + ' (edited)',
+				'name': 'BS Computer Science (edited)'
 			};
 			request(url)
 				.put('/degree-programs/0')
 				.send(update)
 				.end(function(err, res) {
 					if (err) {
-						done();
+					   done();
 					}
 					else {
-						throw new Error({'message': 'Able to retrieve a non-existent degree program'});
+					   throw new Error({'message': 'Can retrieve a non-existent degree program'});
 					}
 				});
 		});

@@ -14,28 +14,17 @@ exports.update = function(req, res, next) {
 	}else if(req.body.recitationInstructor!==undefined){
 		column = 'recitationInstructor';
 		value = req.body.recitationInstructor;
+	}else{
+
+		res.send(404, {message: 'Request is not valid'});
 	}
 
 	db.query("UPDATE section SET "+column+" = "+value+", _updated = now() WHERE _id = ?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
-		selectOne(req.params.id, function(updatedRow) {
-			if (!updatedRow) {
-				res.send(404, {message: 'Assigned Faculty of Section('+req.params.id+') was not updated.'});
-			} else {
-				res.send(200, updatedRow);
-			}
+		db.query("SELECT * from section WHERE _id="+req.params.id, function(err, rows) {
+			if (err) res.send(404, {message: 'Assigned Faculty of Section('+req.params.id+') was not updated.'});
+			res.send(rows[0]);
 		});
 	});
 };
 
-
-var selectOne = function(id, callback) {
-	db.query("SELECT * FROM section WHERE id=? LIMIT 1", [id], function(err, rows) {
-		if (err) return next(err);
-		if (rows.length === 0) {
-			callback(null);
-		} else {
-			callback(rows[0]);
-		}
-	});
-}

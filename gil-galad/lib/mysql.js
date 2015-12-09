@@ -9,6 +9,6 @@ var mysql = require('mysql'),
 		user     : config.user,
 		password : config.pass,
 		database : config.name
-});
+	});
 
 module.exports = db;
