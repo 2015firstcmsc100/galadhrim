@@ -133,3 +133,31 @@ describe('employee',function(){
 		});
 	});
 });
+
+describe('findOne()', function () {
+		it('should retrieve a specific employee ', function (done) {
+			request(url)
+				.get('api/employees/' + insertedId)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+
+		it('should return error trying to retrieve an employee that does not exist', function (done) {
+			request(url)
+				.get('api/employees/')
+				.end(function(err, res) {
+					if (err) {	
+						done();
+					}
+					else {
+						throw new Error({'message': 'Able to retrieve a non-existent employee'});
+					}
+				});
+		});
+	});
