@@ -4,6 +4,7 @@ var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curri
 var curricula = require(__dirname + '/../gil-galad/controllers/api/curricula');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
 var course = require(__dirname + '/../gil-galad/controllers/api/courses');
+var login = require(__dirname + '/../gil-galad/controllers/api/login/login');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
 var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
 //var grades = require(__dirname + '/../gil-galad/controllers/api/students');
@@ -78,6 +79,9 @@ module.exports = function(router, logger) {
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
 
+  router.route('/api/login')
+    .post(login.login);
+
 	router.route('/api/user/profile-picture/:id')
 		.put(profilePicture.update);
 
@@ -110,10 +114,10 @@ module.exports = function(router, logger) {
 	router.route('/api/employees')
 		.get(employees.findEmployees)
 		.post(employees.insert);
-	
+
 	router.route('/api/employees/:id')
 		.get(employees.findOne)
-		
+
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
 
@@ -145,7 +149,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/rooms/:id')
 		.get(room.findOne);
-		
+
 	router.route('/api/tcg')
 		.post(tcg.request);
 
