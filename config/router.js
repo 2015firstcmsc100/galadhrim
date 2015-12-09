@@ -3,6 +3,7 @@ var curriculum = require(__dirname + '/../gil-galad/controllers/curriculum');
 var curriculum_course = require(__dirname + '/../gil-galad/controllers/api/curriculum_course');
 var curricula = require(__dirname + '/../gil-galad/controllers/api/curricula');
 var finalize = require(__dirname + '/../gil-galad/controllers/api/ocm/finalize');
+var cancel = require(__dirname + '/../gil-galad/controllers/api/ocm/cancel');
 var course = require(__dirname + '/../gil-galad/controllers/api/courses');
 var password = require(__dirname + '/../gil-galad/controllers/api/password/reset_password');
 var planOfStudy = require(__dirname + '/../gil-galad/controllers/api/plan_of_study');
@@ -77,7 +78,10 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
-
+	
+	router.route('/api/ocm/cancel/:id')
+		.put(cancel.update);
+		
 	router.route('/api/user/profile-picture/:id')
 		.put(profilePicture.update);
 

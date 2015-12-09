@@ -78,5 +78,6 @@ describe('Curriculum', function() {
 					}
 				});
 		});
-
+	});
+	
 });
