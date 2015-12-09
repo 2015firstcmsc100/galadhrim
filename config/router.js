@@ -75,6 +75,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/sections')
  		.post(section.insert);
+ 	
+ 	router.route('/api/sections/:id')
+ 		.put(section.update);
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
