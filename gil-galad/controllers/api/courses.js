@@ -50,15 +50,34 @@ var selectOne = function(id, callback) {
 			callback(rows[0]);
 		}
 	});
-}
+};
 
 exports.remove = function(req, res, next) {
-  db.query("UPDATE FROM course SET _recStatus = 'INACTIVE' WHERE _id=?", [req.params.id], function(err, row) {
+  db.query("UPDATE course SET _recStatus ='Deleted' WHERE _id=?", [req.params.id], function(err, row) {
     if (err) return next(err);
     if (row.length === 0) {
       res.send(404, {message: 'Course ('+req.params.id+') was not removed.'})
-    } else {
-      res.send(200, row[0]);
-    }
+    } else{
+			selectOne(req.params.id, function(updatedRow){
+				res.status(202).send(updatedRow);
+			});
+		}
   });
+};
+
+exports.update = function(req, res, next) {
+	db.query("UPDATE course SET ? WHERE _id=?", [req.body, req.params.id], function(err, rows) {
+		if (err) return next(err);
+		selectOne(req.params.id, function(updatedRow) {
+
+			if (updatedRow == null) {
+				res.send(404, {message: 'Course ('+req.params.id+') was not found.'});
+			}
+			if (!updatedRow) {
+				res.send(400, {message: 'Course ('+req.params.id+') was not updated.'});
+			} else {
+				res.send(updatedRow);
+			}
+		});
+	});
 };

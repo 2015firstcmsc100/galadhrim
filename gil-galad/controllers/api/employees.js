@@ -11,6 +11,18 @@ exports.findEmployees = function(req, res, next) {
 	});
 };
 
+exports.findOne = function(req, res, next) {
+	db.query("SELECT * FROM employee WHERE _id=?", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			res.send(404, {message: 'Employee not found.'});
+		} else {
+			res.send(rows[0]);
+		}
+	});
+};
+
+
 exports.insert = function(req, res, next) {
 	if (!req.body.firstName) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: firstName'});
