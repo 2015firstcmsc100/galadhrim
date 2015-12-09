@@ -58,7 +58,7 @@ module.exports = function(router, logger) {
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
 
-	router.route('/api/user/profile-picture/:id')
+	router.route('/api/user/update-profile-picture/:id')
 		.put(profilePicture.update);
 
 	router.route('/api/password/reset/:id')
