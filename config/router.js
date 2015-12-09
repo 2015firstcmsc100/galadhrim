@@ -68,7 +68,8 @@ module.exports = function(router, logger) {
 
 	router.route('/api/units/:id')
 		.get(unit.findOne)
-        .delete(unit.remove);
+        .delete(unit.remove)
+        .put(unit.update);
 
     router.route('/api/department')
        	.get(department.find)
