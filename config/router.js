@@ -132,7 +132,8 @@ module.exports = function(router, logger) {
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
-
+		.put(studentRecord.update);
+		
 	router.route('/api/ocm/assign-faculty/:id')
 		.put(assignFaculty.update);
 

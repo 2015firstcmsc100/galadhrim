@@ -12,3 +12,35 @@ exports.findAStudentRecord = function(req, res, next){
 		}
 	});
 };
+
+var selectOne = function(id, callback) {
+	db.query("SELECT * FROM student WHERE _id=? LIMIT 1", [id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			callback(null);
+		} else {
+			callback(rows[0]);
+		}
+	});
+};
+
+exports.update = function(req, res, next) {
+	db.query("UPDATE student SET ? WHERE id=?", [req.body, req.params.id], function(err, rows) {
+		if (err) return next(err);
+		selectOne(req.params.id, function(updated) {
+		
+			if (updated === null) {
+				res.send(404, {message: 'Student record does not exist.'});
+			}
+			
+			if (!updated) {
+				res.send(400, {message: 'Failed to update student record.'});
+			}
+			
+			else {
+				res.send(updated);
+			}
+		});
+	});
+};
+	
