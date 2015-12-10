@@ -102,7 +102,7 @@ CREATE TABLE course(
     _created timestamp DEFAULT CURRENT_TIMESTAMP,
     _recStatus varchar(8) DEFAULT 'ACTIVE',
     _updated timestamp,
-    UNIQUE (code)
+    UNIQUE(code)
 );
 
 
@@ -150,11 +150,21 @@ CREATE TABLE student(
 
 DROP TABLE IF EXISTS student_adviser;
 CREATE TABLE student_adviser(
-    _id varchar(10) NOT NULL,
+    _id int(11) NOT NULL AUTO_INCREMENT,
+    studentId varchar(10) NOT NULL,
     registrationAdviser varchar(256) NOT NULL,
     _created timestamp DEFAULT CURRENT_TIMESTAMP,
     _recStatus varchar(8) DEFAULT 'ACTIVE',
-    _updated timestamp
+    _updated timestamp,
+);
+
+DROP TABLE IF EXISTS room;
+CREATE TABLE room(
+    _id int(11) NOT NULL AUTO_INCREMENT,
+    room varchar(256) NOT NULL,
+    _created timestamp DEFAULT CURRENT_TIMESTAMP,
+    _recStatus varchar(8) DEFAULT 'ACTIVE',
+    _updated timestamp,
 );
 
 
@@ -265,6 +275,7 @@ CREATE TABLE waitlist (
     _updated timestamp
 );
 
+
 DROP TABLE IF EXISTS plan_of_study;
 CREATE TABLE plan_of_study(
     _id int(11) AUTO_INCREMENT PRIMARY KEY,
@@ -273,6 +284,20 @@ CREATE TABLE plan_of_study(
     studentId varchar(10) NOT NULL,
     isApproved varchar(10) DEFAULT 'PENDING',
     previousCourseId int(11),
+    _created timestamp DEFAULT CURRENT_TIMESTAMP,
+    _recStatus varchar(8) DEFAULT 'ACTIVE',
+    _updated timestamp
+);
+
+DROP TABLE IF EXISTS tcg;
+CREATE TABLE tcg(
+    _id int(11) AUTO_INCREMENT PRIMARY KEY,
+    studentId varchar(10) NOT NULL,
+    startYear varchar(8) NOT NULL,
+    startSemester varchar(16) NOT NULL,
+    endYear varchar(8) NOT NULL,
+    endSemester varchar(16) NOT NULL,
+    isApproved varchar(10) DEFAULT 'PENDING',
     _created timestamp DEFAULT CURRENT_TIMESTAMP,
     _recStatus varchar(8) DEFAULT 'ACTIVE',
     _updated timestamp

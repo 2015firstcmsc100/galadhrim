@@ -83,17 +83,17 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	
 	router.route('/api/ocm/cancel/:id')
 		.put(cancel.update);
 		
-=======
+//=======
 
   router.route('/api/login')
     .post(login.login);
 
->>>>>>> 7e48e02d09cff9def600036bceff056da00aec8c
+//>>>>>>> 7e48e02d09cff9def600036bceff056da00aec8c
 	router.route('/api/user/profile-picture/:id')
 		.put(profilePicture.update);
 
@@ -132,7 +132,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
-		.put(studentRecord.update);
+	//	.put(studentRecord.update);
 		
 	router.route('/api/ocm/assign-faculty/:id')
 		.put(assignFaculty.update);
