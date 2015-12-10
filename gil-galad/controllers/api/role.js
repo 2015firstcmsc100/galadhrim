@@ -1,5 +1,5 @@
-var logger = require(__dirname + '/../../../../lib/logger'),
-	db = require(__dirname + '/../lib/mysql');
+var	logger = require(__dirname + '/../../../lib/logger'),
+    db = require(__dirname + '/../../lib/mysql');
 	
 exports.update = function(req, res, next) {
 	db.query("UPDATE role SET ? WHERE userId=? && _id=?", [req.body, req.params.userId, req.params.id], function(err, rows) {
