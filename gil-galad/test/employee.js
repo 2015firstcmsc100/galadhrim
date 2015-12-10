@@ -132,4 +132,78 @@ describe('employee',function(){
 				});
 		});
 	});
+	
+	describe('insert()',function(){
+		it('should create a new employee', function (done) {
+			var employee = {
+				'firstName': 'Marie Betel',
+				'lastName': 'de Robles',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					res.body.should.have.keys(['firstName','lastName','unitId']);
+					insertedId = res.body._id;
+					done();
+				});
+		});
+
+		it('should return error trying to create an employee with duplicate code', function (done) {
+			var employee = {
+				'firstName': 'Marie Betel',
+				'lastName': 'de Robles',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						done();
+					} else {
+						throw new Error({'message': 'Able to create an employee despite duplicate code'});
+					}
+				});
+		});
+
+		it('should return error trying to create an employee without last name', function (done) {
+			var employee = {
+				'firstName': 'Marie Betel',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						done();
+					} else {
+						throw new Error('Able to create an employee without last name');
+					}
+				});
+		});
+
+		it('should return error trying to create an employee without first name', function (done) {
+			var employee = {
+				'lastName': 'de Robles',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						done();
+					} else {
+						throw new Error('Able to create section without first name');
+					}
+				});
+		});
+	});
 });
