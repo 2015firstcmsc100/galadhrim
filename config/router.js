@@ -84,17 +84,16 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
-//<<<<<<< HEAD
 	
 	router.route('/api/ocm/cancel/:id')
 		.put(cancel.update);
 		
-//=======
+ 	router.route('/api/login')
+    		.post(login.login);
+    		
+    	router.route('/api/logout/:id')
+    		.put(logout.logout);
 
-  router.route('/api/login')
-    .post(login.login);
-
-//>>>>>>> 7e48e02d09cff9def600036bceff056da00aec8c
 	router.route('/api/user/profile-picture/:id')
 		.put(profilePicture.update);
 
