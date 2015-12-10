@@ -81,6 +81,7 @@ module.exports = function(router, logger) {
        	.get(department.find)
 
 	router.route('/api/sections')
+ 		.get(section.findSections)
  		.post(section.insert);
  	
  	router.route('/api/sections/:id')
@@ -120,6 +121,14 @@ module.exports = function(router, logger) {
 
 	router.route('/api/course-offerings')
 		.get(courseOfferings.find);
+		
+	router.route('/api/course-offerings/:year/:sem')
+		.delete(courseOfferings.removeSections);	
+	
+		
+		
+		
+		
 
 	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
