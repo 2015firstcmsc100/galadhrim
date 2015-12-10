@@ -121,6 +121,14 @@ module.exports = function(router, logger) {
 
 	router.route('/api/course-offerings')
 		.get(courseOfferings.find);
+		
+	router.route('/api/course-offerings/:year/:sem')
+		.delete(courseOfferings.removeSections);	
+	
+		
+		
+		
+		
 
 	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
