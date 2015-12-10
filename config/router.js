@@ -137,15 +137,12 @@ module.exports = function(router, logger) {
 		.get(grades.findstudentGrade);
 
 	router.route('/api/employees')
-		.delete(employees.remove)
 		.get(employees.findEmployees)
 		.post(employees.insert);
 
 	router.route('/api/employees/:id')
-		.delete(employees.remove);
-
-	router.route('/api/employees/:id')
 		.get(employees.findOne)
+		.delete(employees.remove);
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
