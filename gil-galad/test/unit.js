@@ -84,4 +84,43 @@ describe('unit', function() {
 		});
 	});
 	
+	describe('find()', function() {
+		it('should retrieve all unit records', function (done) {
+			request(url)
+				.get('api/unit')
+				.end(function(err, res){
+					if(err){
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+	});
+
+	describe('selectOne()' function(){
+		it('should retrieve a specific unit record', function (done){
+			request(url)
+				.get('api/unit' + insertedId)
+				.end(function(err, res){
+					if(err){
+						throw error;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+		it('should return error trying to retrieve a unit that does not exist', function (done){
+			request(url)
+				.get('/api/unit/0')
+				.end(function(err, res){
+					if(err){
+						done();
+					}else{
+						throw new Error({'message': 'Able to retrieve a non-existent unit'});
+					}
+				});
+		});
+	});
 });
