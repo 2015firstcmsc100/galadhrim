@@ -26,6 +26,7 @@ var room = require(__dirname + '/../gil-galad/controllers/api/room');
 var change_password = require(__dirname + '/../gil-galad/controllers/api/password/change_password');
 var tcg = require(__dirname + '/../gil-galad/controllers/api/tcg');
 var cancel = require(__dirname + '/../gil-galad/controllers/api/ocm/cancel');
+var role = require(__dirname + '/../gil-galad/controllers/api/role');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -165,6 +166,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/tcg')
 		.post(tcg.request);
+	
+	router.route('/api/:userId/roles/:id')
+		.put(role.userId, role.id);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
