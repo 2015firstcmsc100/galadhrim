@@ -81,6 +81,7 @@ module.exports = function(router, logger) {
        	.get(department.find)
 
 	router.route('/api/sections')
+ 		.get(section.findSections)
  		.post(section.insert);
  	
  	router.route('/api/sections/:id')
