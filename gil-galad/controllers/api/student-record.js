@@ -2,6 +2,17 @@ var	logger = require(__dirname + '/../../../lib/logger'),
     db = require(__dirname + '/../../lib/mysql');				//connecting to database
 
 
+exports.showAllStudentRecords = function(req, res, next){
+	db.query("SELECT * FROM student" , function(err, rows){		//retrieving a student data
+		if(err) return next(err);		//skipping all the route handlers and send errors to client
+		if(rows.length===0){
+			res.status(404).send('No Student Records Found!');
+		}else{
+			res.send(200, rows);		//send retrieved row
+		}
+	});
+};
+
 exports.findAStudentRecord = function(req, res, next){
 	db.query("SELECT * FROM student WHERE _id=?", [req.params.id], function(err, rows){		//retrieving a student data
 		if(err) return next(err);		//skipping all the route handlers and send errors to client
@@ -141,3 +152,4 @@ exports.update_isDeletedRecord = function(req, res, next) {
 		});
 	});
 };
+
