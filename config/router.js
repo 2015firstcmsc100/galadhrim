@@ -148,6 +148,9 @@ module.exports = function(router, logger) {
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
 
+	router.route('/api/student')
+		.post(studentRecord.createStudentRecord);
+
 	router.route('/api/student-record/:id/adviser')
 		.put(studentRecord.update_RegAdviser);
 
