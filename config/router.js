@@ -68,6 +68,9 @@ module.exports = function(router, logger) {
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses)
  		.delete(curriculum_course.remove);
+ 		
+ 	router.route('/api/curriculum_course')
+ 	   .post(curriculum_course.insert);
 
  	router.route('/api/curricula')
  		.get(curricula.find);
@@ -81,6 +84,7 @@ module.exports = function(router, logger) {
        	.get(department.find)
 
 	router.route('/api/sections')
+ 		.get(section.findSections)
  		.post(section.insert);
  	
  	router.route('/api/sections/:id')
@@ -120,6 +124,14 @@ module.exports = function(router, logger) {
 
 	router.route('/api/course-offerings')
 		.get(courseOfferings.find);
+		
+	router.route('/api/course-offerings/:year/:sem')
+		.delete(courseOfferings.removeSections);	
+	
+		
+		
+		
+		
 
 	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
@@ -133,6 +145,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/employees/:id')
 		.get(employees.findOne)
+		.delete(employees.remove);
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);

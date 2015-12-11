@@ -150,6 +150,16 @@ exports.update = function(req, res, next) {
 	});
 };
 
+exports.findSections = function(req, res, next) {
+	db.query("SELECT * FROM section", function(err, rows) {
+		if (err) {
+			res.send(400, {message: 'No records found.'});
+		}else {
+			res.send(200, rows);
+		}
+	});
+};
+
 var selectOne = function(id, callback) {
 	db.query("SELECT * FROM section WHERE _id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);

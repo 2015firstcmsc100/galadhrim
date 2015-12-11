@@ -80,4 +80,31 @@ describe('Curriculum', function() {
 		});
 	});
 	
+	describe('findOne()', function () {
+		it('should retrieve a specific curriculum', function (done) {
+			request(url)
+				.get('/api/curricula/0')
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+
+		it('should return error trying to retrieve a specific curriculum that does not exist', function (done) {
+			request(url)
+				.get('/api/curricula/0')
+				.end(function(err, res) {
+					if (err) {
+						done();
+					}
+					else {
+						throw new Error({'message': 'Able to retrieve a non-existent curriculum'});
+					}
+				});
+		});
+	});
 });

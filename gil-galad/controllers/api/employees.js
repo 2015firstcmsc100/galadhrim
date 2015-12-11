@@ -46,6 +46,19 @@ exports.insert = function(req, res, next) {
 	});
 };
 
+exports.remove = function(req, res, next) {
+	db.query("UPDATE employee SET _recStatus = 'Deleted' WHERE _id=?", [req.params.id], function(err, row) {
+		if(err) return next(err);
+		if(row.length === 0){
+			res.send(404, {message: 'Employee ('+req.params.id+') was not removed. '})
+		}else{
+			selectOne(req.params.id, function(updatedRow){
+				res.status(202).send(updatedRow);
+			});
+		}
+	});
+};
+
 var selectOne = function(id, callback) {
 	db.query("SELECT * FROM employee WHERE _id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);
@@ -56,3 +69,4 @@ var selectOne = function(id, callback) {
 		}
 	});
 };
+
