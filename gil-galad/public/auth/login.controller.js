@@ -2,7 +2,7 @@
 
 var app = angular.module('galadhrimApp');
 
-app.controller('LoginController', ['$scope', 'LoginService', function ($scope, LoginService) {
+app.controller('LoginController', ['$scope', '$cookies', 'LoginService', function ($scope, $cookies, LoginService) {
 	$scope.login = {
 		username: '',
 		password: ''
