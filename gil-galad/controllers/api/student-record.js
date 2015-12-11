@@ -14,7 +14,7 @@ exports.findAStudentRecord = function(req, res, next){
 };
 
 exports.createStudentRecord = function(req, res, next){
-	
+
 	function start () {
 		if (!req.body.studentId) {
 			return res.send(400, {message: 'Missing parameter: studentId'});
@@ -57,8 +57,17 @@ exports.createStudentRecord = function(req, res, next){
 
 		function(err, row) {
 			if (err) return next(err);
+			else returnResource();
+		});
+	}
 
-			return res.status(200).send(row);
+	function returnResource() {
+		db.query("SELECT * FROM student where _id = ?", [req.body.studentId],
+
+		function(err, row) {
+			if (err) return next(err);
+
+			return res.status(200).send(row[0]);
 		});
 	}
 
