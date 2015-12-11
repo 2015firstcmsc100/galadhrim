@@ -43,4 +43,21 @@ exports.update = function(req, res, next) {
 		});
 	});
 };
-	
+
+exports.update_RegAdviser = function(req, res, next) {
+	db.query("UPDATE student_adviser SET ? WHERE id=?", [req.body, req.params.id], function(err, rows) {
+		if (err) return next(err);			//skipping route handlers and send errors to client
+		selectOne(req.params.id, function(updated) {
+		
+			if (updated === null || !updated) {
+				res.send(404, {message: 'Id does not exist.'});
+			}
+			
+			else {
+				selectOne(req.params.id, function(updatedRow){
+					res.status(200).send(updated);
+				});
+			}
+		});
+	});
+};	
