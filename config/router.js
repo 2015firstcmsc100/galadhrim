@@ -28,6 +28,7 @@ var tcg = require(__dirname + '/../gil-galad/controllers/api/tcg');
 var cancel = require(__dirname + '/../gil-galad/controllers/api/ocm/cancel');
 var role = require(__dirname + '/../gil-galad/controllers/api/role');
 var classlist = require(__dirname + '/../gil-galad/controllers/api/ocm/classlist');
+var sectionGet = require(__dirname + '/../gil-galad/controllers/api/section-get');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -37,6 +38,9 @@ module.exports = function(router, logger) {
  		logger.log('verbose', req.body);
  		next();
  	});
+
+	router.route('/api/sections/:id')
+   	.get(sectionGet.find)  
 
 	router.route('/api/grades/:id')
  		.delete(student_grades.remove);
