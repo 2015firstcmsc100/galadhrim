@@ -39,9 +39,6 @@ module.exports = function(router, logger) {
  		next();
  	});
 
-	router.route('/api/sections/:id')
-   	.get(sectionGet.find)  
-
 	router.route('/api/grades/:id')
  		.delete(student_grades.remove);
 
@@ -92,7 +89,8 @@ module.exports = function(router, logger) {
  		.post(section.insert);
 
  	router.route('/api/sections/:id')
- 		.put(section.update);
+ 		.put(section.update)
+ 		.get(sectionGet.find);
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
