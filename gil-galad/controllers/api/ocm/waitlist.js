@@ -35,13 +35,13 @@ exports.find = function(req, res, next) {
 };
 
 exports.findOne = function(req, res, next){
-	db.query("SELECT studentId FROM waitlist WHERE _id=? AND sectionId=? ",[req.params.id, req.params.id]function(err, rows){
+	db.query("SELECT studentId FROM waitlist WHERE _id=? AND sectionId=? ",[req.params.id, req.params.id], function(err, rows){
 		if (err) return next(err);
 		if (rows.length === 0){
 			res.send(404, {message: 'No waitlist found in this section.'});
 		}
 		else{
-			res.send(200, rows[0]);		
+			res.send(200, rows[0]);
 		}
 	});
 };
@@ -56,5 +56,3 @@ var selectOne = function(id, callback) {
     }
   });
 }
-
-

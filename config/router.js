@@ -99,8 +99,8 @@ module.exports = function(router, logger) {
  	router.route('/api/login')
     		.post(login.login);
 
-    	router.route('/api/logout/:id')
-    		.put(logout.logout);
+    	// router.route('/api/logout/:id')
+    	// 	.put(logout.logout);
 
 	router.route('/api/user/profile-picture/:id')
 		.put(profilePicture.update);
@@ -191,8 +191,8 @@ module.exports = function(router, logger) {
 	router.route('/api/tcg')
 		.post(tcg.request);
 
-	router.route('/api/:userId/roles/:id')
-		.put(role.userId, role.id);
+	// router.route('/api/:userId/roles/:id')
+	// 	.put(role.userId, role.id);
 
 	router.all('*', function (req, res, next) {
 		res.send(404, {message : 'Nothing to do here.'});
