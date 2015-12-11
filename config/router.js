@@ -161,6 +161,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/waitlist')
 		.get(waitlist.find);
+	
+	router.route('/api/ocm/wailist/:id')
+		.get(waitlist.findOne);
 
   	router.route('/api/announcements')
   		.get(announcement.find)
