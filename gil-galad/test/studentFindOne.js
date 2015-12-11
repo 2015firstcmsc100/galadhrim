@@ -29,7 +29,7 @@ describe('Students',function(){
 				if (err) {
 					throw err;
 				}
-        insertedId = res._id;
+        insertedId = res.body._id;
         done();
 		});
   });
@@ -58,7 +58,7 @@ describe('Students',function(){
 
     it('should return a 404 on an invalid student record', function (done) {
       request('localhost:5000/')
-				.get('api/student-record/123456')
+				.get('api/student-record/000000')
 				.end(function(err, res) {
 					res.should.have.status(404);
 
