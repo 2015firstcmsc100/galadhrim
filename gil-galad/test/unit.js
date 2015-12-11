@@ -123,4 +123,87 @@ describe('unit', function() {
 				});
 		});
 	});
+
+	describe('Update a degree program', function () {
+		
+		it('should update a specific unit record: code field only', function (done) { //if the user wants to update the code only
+			var update = {
+				'code': randomizedCode + '(edited)',
+			};
+			request(url)
+				.put('/api/units/:' + insertedId)
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					else {
+						res.should.have.status(200);
+						res.body.should.have.property('code', randomizedCode + ' (edited)');
+						res.body.should.have.property('name', 'Name (edited)');
+						done();
+					}
+				});
+		});
+
+
+		it('should update a specific unit record: name field only', function (done) {	//if the user wants to update the name 
+			var update = {
+				'name': 'Name (edited)'
+			};
+			request(url)
+				.put('/api/units/:' + insertedId)
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					else {
+						res.should.have.status(200);
+						res.body.should.have.property('code', randomizedCode + ' (edited)');
+						res.body.should.have.property('name', 'Name (edited)');
+						done();
+					}
+				});
+		});
+
+
+		it('should update a specific unit record', function (done) {		//must be specific
+			var update = {
+				'code': randomizedCode,
+				'name': 'Name'
+			};
+			request(url)
+				.put('/api/units/:' + insertedId)
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					res.body.should.have.property('code', randomizedCode);
+					res.body.should.have.property('name', 'BS Computer Science');
+					done();
+				});
+		});
+
+		it('should return error trying to update a unit record that does not exist', function (done) {	//record that does not exist
+			var update = {
+				'code': randomizedCode + ' (edited)',
+				'name': 'BS Computer Science (edited)'
+			};
+			request(url)
+				.put('/api/units/:0')
+				.send(update)
+				.end(function(err, res) {
+					if (err) {
+					   done();
+					}
+					else {
+					   throw new Error({'message': 'Can retrieve a non-existent degree program'});
+					}
+				});
+		});
+	});
+
 });
