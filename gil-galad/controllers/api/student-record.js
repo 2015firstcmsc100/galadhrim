@@ -45,7 +45,7 @@ exports.update = function(req, res, next) {
 };
 
 exports.update_RegAdviser = function(req, res, next) {
-	db.query("UPDATE student_adviser SET ? WHERE id=?", [req.body, req.params.id], function(err, rows) {
+	db.query("UPDATE student_adviser SET ? WHERE id=? AND studentId=?", [req.body, req.params.id, req.params.id], function(err, rows) {
 		if (err) return next(err);			//skipping route handlers and send errors to client
 		selectOne(req.params.id, function(updated) {
 		
