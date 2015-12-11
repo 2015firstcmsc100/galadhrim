@@ -8,12 +8,6 @@ var config = require(__dirname + '/../../config/config'),
 
 describe('Course',function(){	
 
-   /*code varchar(16) NOT NULL,
-   *name varchar(256) NOT NULL,
-   *units tinyint(2),
-   *semesterOffered varchar(3),
-   *unitId int(11),*/
-
 	describe("update()", function(){
 	
 		it('should update a specific course: code field only', function (done) {
@@ -33,7 +27,7 @@ describe('Course',function(){
 						res.body.should.have.property('name': 'Introduction to Web Programming');
 						res.body.should.have.property('units': '3');
 						res.body.should.have.property('semesterOffered': '1st');
-						res.body.should.have.property('unitId': 'randomCode');
+						res.body.should.have.property('unitId': courseCode);
 						done();
 					}
 				});
@@ -56,7 +50,7 @@ describe('Course',function(){
 						res.body.should.have.property('name': 'Introduction to Web Programming');
 						res.body.should.have.property('units': '3');
 						res.body.should.have.property('semesterOffered': '1st');
-						res.body.should.have.property('unitId': 'randomCode');
+						res.body.should.have.property('unitId': courseCode);
 						done();
 					}
 				});
@@ -79,7 +73,7 @@ describe('Course',function(){
 						res.body.should.have.property('name': 'Introduction to Web Programming');
 						res.body.should.have.property('units': '3');
 						res.body.should.have.property('semesterOffered': '1st');
-						res.body.should.have.property('unitId': 'randomCode');
+						res.body.should.have.property('unitId': courseCode);
 						done();
 					}
 				});
@@ -102,7 +96,7 @@ describe('Course',function(){
 						res.body.should.have.property('name': 'Introduction to Web Programming');
 						res.body.should.have.property('units': '3');
 						res.body.should.have.property('semesterOffered': '1st');
-						res.body.should.have.property('unitId': 'randomCode');
+						res.body.should.have.property('unitId': courseCode);
 						done();
 					}
 				});
@@ -110,7 +104,7 @@ describe('Course',function(){
 		
 		it('should update a specific course: unitId field only', function (done) {
 			var update = {
-				'unitId': 'randomCode';
+				'unitId': courseCode;
 			};
 			request(url)
 				.put('/api/courses/' + insertedId)
@@ -125,7 +119,7 @@ describe('Course',function(){
 						res.body.should.have.property('name': 'Introduction to Web Programming');
 						res.body.should.have.property('units': '3');
 						res.body.should.have.property('semesterOffered': '1st');
-						res.body.should.have.property('unitId': 'randomCode');
+						res.body.should.have.property('unitId': courseCode);
 						done();
 					}
 				});
