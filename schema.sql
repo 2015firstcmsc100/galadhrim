@@ -156,6 +156,7 @@ CREATE TABLE student_adviser(
     _created timestamp DEFAULT CURRENT_TIMESTAMP,
     _recStatus varchar(8) DEFAULT 'ACTIVE',
     _updated timestamp,
+    PRIMARY KEY(_id)
 );
 
 DROP TABLE IF EXISTS room;
@@ -165,6 +166,7 @@ CREATE TABLE room(
     _created timestamp DEFAULT CURRENT_TIMESTAMP,
     _recStatus varchar(8) DEFAULT 'ACTIVE',
     _updated timestamp,
+    PRIMARY KEY(_id)
 );
 
 
@@ -222,7 +224,7 @@ CREATE TABLE recommended_course(
     _recStatus varchar(8) DEFAULT 'ACTIVE',
     _updated timestamp,
     UNIQUE (courseId, studentId)
-); 
+);
 
 
 DROP TABLE IF EXISTS grade;

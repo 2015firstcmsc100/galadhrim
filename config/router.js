@@ -43,10 +43,10 @@ module.exports = function(router, logger) {
 
 	router.route('/api/sections/:id/grades')
  		.get(section_grades.find);
-	
+
 	router.route('/api/ocm/classlist/:id')
 		.get(classlist.find);
-	
+
  	router.route('/degree-programs')
  		.get(degreeProgram.find)
  		.post(degreeProgram.insert);
@@ -68,7 +68,7 @@ module.exports = function(router, logger) {
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses)
  		.delete(curriculum_course.remove);
- 		
+
  	router.route('/api/curriculum_course')
  	   .post(curriculum_course.insert);
 
@@ -86,19 +86,19 @@ module.exports = function(router, logger) {
 	router.route('/api/sections')
  		.get(section.findSections)
  		.post(section.insert);
- 	
+
  	router.route('/api/sections/:id')
  		.put(section.update);
 
 	router.route('/api/ocm/finalize/:id')
 		.put(finalize.update);
-	
+
 	router.route('/api/ocm/cancel/:id')
 		.put(cancel.update);
-		
+
  	router.route('/api/login')
     		.post(login.login);
-    		
+
     	router.route('/api/logout/:id')
     		.put(logout.logout);
 
@@ -124,20 +124,23 @@ module.exports = function(router, logger) {
 
 	router.route('/api/course-offerings')
 		.get(courseOfferings.find);
-		
+
 	router.route('/api/course-offerings/:year/:sem')
-		.delete(courseOfferings.removeSections);	
-	
-		
-		
-		
-		
+		.delete(courseOfferings.removeSections);
+
+
+
+
+
 
 	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
 
 	router.route('/api/students/:id/grades')
 		.get(grades.findstudentGrade);
+
+	router.route('/api/students/:id')
+		.put(studentRecord.update_isDeletedRecord);
 
 	router.route('/api/employees')
 		.get(employees.findEmployees)
@@ -152,7 +155,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/student-record/:id/adviser')
 		.put(studentRecord.update_RegAdviser);
-		
+
 	router.route('/api/ocm/assign-faculty/:id')
 		.put(assignFaculty.update);
 
@@ -161,7 +164,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/waitlist')
 		.get(waitlist.find);
-	
+
 	router.route('/api/ocm/wailist/:id')
 		.get(waitlist.findOne);
 
@@ -187,7 +190,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/tcg')
 		.post(tcg.request);
-	
+
 	router.route('/api/:userId/roles/:id')
 		.put(role.userId, role.id);
 
