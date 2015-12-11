@@ -13,6 +13,58 @@ exports.findAStudentRecord = function(req, res, next){
 	});
 };
 
+exports.createStudentRecord = function(req, res, next){
+	
+	function start () {
+		if (!req.body.studentId) {
+			return res.send(400, {message: 'Missing parameter: studentId'});
+		}
+		if (!req.body.firstName) {
+			return res.send(400, {message: 'Missing parameter: firstName'});
+		}
+		if (!req.body.lastName) {
+			return res.send(400, {message: 'Missing parameter: lastName'});
+		}
+		if (!req.body.curriculumId) {
+			return res.send(400, {message: 'Missing parameter: curriculumId'});
+		}
+		if (!req.body.sex) {
+			return res.send(400, {message: 'Missing parameter: sex'});
+		}
+		//return res.send(200, {message: 'Plutia'});
+	
+		db.query("SELECT * FROM student where _id = ?", [req.body.studentId], function(err, rows) {
+			if (err) return next(err);
+			if (rows.length !== 0) {
+				return res.status(400).send({message: 'Duplicate entry for student: ' + req.body.studentId});
+			}
+			else {
+				insertRecord();
+			}
+		});
+	}
+	
+	function insertRecord () {
+		db.query ("INSERT INTO student (_id, firstName, middleName, lastName, curriculumId, sex) VALUES (?, ?, ?, ?, ?, ?)",
+			[
+				req.body.studentId,
+				req.body.firstName,
+				req.body.middleName,
+				req.body.lastName,
+				req.body.curriculumId,
+				req.body.sex
+			],
+	
+		function(err, row) {
+			if (err) return next(err);
+			
+			return res.status(200).send(row);
+		});
+	}
+
+	start();
+};
+
 var selectOne = function(id, callback) {
 	db.query("SELECT * FROM student WHERE _id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);
