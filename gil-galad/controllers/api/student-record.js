@@ -32,7 +32,7 @@ exports.createStudentRecord = function(req, res, next){
 			return res.send(400, {message: 'Missing parameter: sex'});
 		}
 		//return res.send(200, {message: 'Plutia'});
-	
+
 		db.query("SELECT * FROM student where _id = ?", [req.body.studentId], function(err, rows) {
 			if (err) return next(err);
 			if (rows.length !== 0) {
@@ -43,7 +43,7 @@ exports.createStudentRecord = function(req, res, next){
 			}
 		});
 	}
-	
+
 	function insertRecord () {
 		db.query ("INSERT INTO student (_id, firstName, middleName, lastName, curriculumId, sex) VALUES (?, ?, ?, ?, ?, ?)",
 			[
@@ -54,10 +54,10 @@ exports.createStudentRecord = function(req, res, next){
 				req.body.curriculumId,
 				req.body.sex
 			],
-	
+
 		function(err, row) {
 			if (err) return next(err);
-			
+
 			return res.status(200).send(row);
 		});
 	}

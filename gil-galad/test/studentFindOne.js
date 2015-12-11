@@ -15,32 +15,29 @@ describe('Students',function(){
 
   // insert first a student before retrieving it
   before(function(done){
-  	// request('localhost:5000/')
-    //   .post('api/students')
-		// 	.send({
-    //     studentId: '2013-12345',
-    //     firstName: 'First Name',
-    //     middleName: 'Middle Name',
-    //     lastName: 'Last Name',
-    //     curriculumId: '1',
-    //     sex: 'M'
-    //   })
-		// 	.end(function(err, res) {
-		// 		if (err) {
-		// 			throw err;
-		// 		}
-		// 		done();
-		// 	});
-
-    // because the WS is not yet done as of writing this test, the id is hardcoded.
-    insertedId = '2013-12345';
-    done();
+  	request('localhost:5000/')
+      .post('api/student')
+			.send({
+        studentId: '9999-12345',
+        firstName: 'First Name',
+        middleName: 'Middle Name',
+        lastName: 'Last Name',
+        curriculumId: '1',
+        sex: 'M'
+      })
+			.end(function(err, res) {
+				if (err) {
+					throw err;
+				}
+        insertedId = res._id;
+        done();
+		});
   });
 
   // delete the inserted student after retrieving it
   after(function(){
-    // request('localhost:5000/')
-    //   .delete('api/student-record/' + insertedId);
+    request('localhost:5000/')
+      .delete('api/student-record/' + insertedId);
   });
 
   describe("findOne()", function(){
