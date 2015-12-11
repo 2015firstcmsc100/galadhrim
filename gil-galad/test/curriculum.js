@@ -83,7 +83,7 @@ describe('Curriculum', function() {
 	describe('findOne()', function () {
 		it('should retrieve a specific curriculum', function (done) {
 			request(url)
-				.get('/api/curricula/' + insertedId)
+				.get('/api/curricula/0')
 				.end(function(err, res) {
 					if (err) {
 						throw err;
