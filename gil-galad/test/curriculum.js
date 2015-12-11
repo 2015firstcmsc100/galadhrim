@@ -89,6 +89,7 @@ describe('Curriculum', function() {
 						throw err;
 					}
 					res.should.have.status(200);
+					res.body.should.have.keys(['_id','code','name']);
 					done();
 				});
 		});
