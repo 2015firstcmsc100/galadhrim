@@ -68,6 +68,9 @@ module.exports = function(router, logger) {
  	router.route('/api/curriculum-course/:id')
  		.get(curriculum_course.findCourses)
  		.delete(curriculum_course.remove);
+ 		
+ 	router.route('/api/curriculum_course')
+ 	   .post(curriculum_course.insert);
 
  	router.route('/api/curricula')
  		.get(curricula.find);
