@@ -22,7 +22,7 @@
 			})
 		};
 
-		service.addGrade = 	function (newGrade){
+		service.addGrade = function (newGrade){
 			var params = 'id=' + newGrade.id + ', studentid=' + newGrade.studentid + ', sectionid=' + newGrade.sectionid +
 				', grade=' + newGrade.grade + ', remarks=' + newGrade.remarks;
 
@@ -33,7 +33,7 @@
 			}).success(function(data){
 				return data;
 			}).error(function(data){
-				alert("Error in getting grades!");
+				alert("Error in adding grades!");
 			})
 		};
 
