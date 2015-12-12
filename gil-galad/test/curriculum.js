@@ -108,4 +108,47 @@ describe('Curriculum', function() {
 				});
 		});
 	});
+	
+	describe("remove()", function() {
+		it("should return the deleted curricula", function(done) {
+		request(url)
+			.delete("/api/curricula/0")
+			.end(function(err, res) {
+			if(err) {
+				done();
+			} else {
+				res.should.have.status(200);
+				res.body.should.be.an.instanceof(Object);
+				res.should.have.properties(["_id", "code", "name", "degreeProgramId", "_created", "_recStatus"]);
+			}
+			});
+		});
+	
+		it("should mark _recStatus of curricula as DELETED", function(done) {
+		request(url)
+			.delete("/api/curricula/0")
+			.end(function(err, res) {
+			if(err) {
+				done();
+			} else {
+				res.should.have.status(200);
+				res.should.have.property("_recStatus", "DELETED");
+				done();
+			}
+			});
+		});
+	
+		it("should return error trying to delete a curricula that does not exist", function(done) {
+		request(url)
+			.delete("/api/curricula/abcd")
+			.end(function(err, res) {
+			if(err) {
+				done();
+			} else {
+				throw new Error({"message": "Cannot delete a curricula that does not exist."});
+			}
+			});
+		});
+	});
+	
 });
