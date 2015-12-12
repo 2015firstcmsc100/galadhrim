@@ -13,6 +13,7 @@ var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-r
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
+var slot = require(__dirname + '/../gil-galad/controllers/api/slot');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-offerings');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
@@ -198,6 +199,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/tcg')
 		.post(tcg.request);
+
+  router.route('/api/generate-slots')
+		.post(slot.generateSlots);
 
 	// router.route('/api/:userId/roles/:id')
 	// 	.put(role.userId, role.id);
