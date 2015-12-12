@@ -9,7 +9,7 @@ describe('room', function() {
 	var roomId = 0;
 
 	describe('update()', function () {
-		
+
 		it('should update a specific room: name field only', function (done) {
 			var update = {
 				'name': 'ICS Mega Hall';
@@ -89,5 +89,32 @@ describe('room', function() {
 				});
 		});
 	});
+
+	describe('findOne()', function () {
+        it('should retrieve a specific room record', function (done) {
+            request(url)
+                .get('/rooms/' + insertedId)
+                .end(function(err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    res.should.have.status(200);
+                    done();
+                });
+        });
+
+        it('should return error trying to retrieve a room record that does not exist', function (done) {
+            request(url)
+                .get('/rooms/0')
+                .end(function(err, res) {
+                    if (err) {
+                        done();
+                    }
+                    else {
+                        throw new Error({'message': 'Not able to retrieve a non-existent room'});
+                    }
+                });
+        });
+    });
 
 });
