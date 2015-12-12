@@ -48,7 +48,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/classlist/:id')
 		.get(classlist.find);
-		
+
 	router.route('/api/ocm/schedule/:id')
 		.get(schedule.find);
 
@@ -122,7 +122,8 @@ module.exports = function(router, logger) {
 
 	router.route('/api/courses/:id')
   		.delete(course.remove)
-  		.put(course.update);
+  		.put(course.update)
+      .get(course.findOne);
 
 	router.route('/api/plan-of-study/:id')
 		.get(planOfStudy.findOne)
@@ -153,7 +154,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/student-record/:id')
 		.get(studentRecord.findAStudentRecord);
-		
+
 	router.route('/api/student-record/')
 		.get(studentRecord.showAllStudentRecords);
 
