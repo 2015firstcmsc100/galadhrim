@@ -12,7 +12,7 @@ describe('room', function() {
 
 		it('should update a specific room: name field only', function (done) {
 			var update = {
-				'name': 'ICS Mega Hall';
+				'name': 'ICS Mega Hall'
 			};
 			request(url)
 				.put('/api/rooms/' + roomId)
@@ -116,5 +116,19 @@ describe('room', function() {
                 });
         });
     });
+
+    describe('find()', function () {
+		it('should retrieve all room records', function (done) {
+			request(url)
+				.get('/rooms')
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+	});
 
 });
