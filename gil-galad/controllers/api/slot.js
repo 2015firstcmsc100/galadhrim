@@ -7,7 +7,7 @@ exports.generateSlots = function(req,res,next){
 
 		for(var i = req.body.numberOfSlots; i > 0; i--){
 				db.query("INSERT INTO slot(sectionId) values(?)",[req.body.sectionId], function(err,next){
-					if (err) return next(err);
+					if (err) return res.send(400, {'error': true, 'message': 'Failed slot generation'});
 					return res.send(201, {'success':true, 'message': 'Succesful slot generation'});
 				});
 		}
