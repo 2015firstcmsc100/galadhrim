@@ -23,7 +23,7 @@ describe('room', function() {
 					}
 					else {
 						res.should.have.status(200);
-						res.body.should.have.property('room', 'Test Room');
+						res.body.should.be.an.instanceOf(Object).and.have.property('room', 'Test Room');
 						done();
 					}
 				});
