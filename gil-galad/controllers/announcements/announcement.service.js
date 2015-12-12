@@ -53,24 +53,25 @@
 				.error(function(data) {
 					deferred.reject("Error: Cannot Edit Announcement");
 				});
-		  
-		  function DeleteAnnouncement(id) {
-			var deferred = $q.defer();
+				return deferred.promise;
+			}		  
+		  	
+		  	function DeleteAnnouncement(id) {
+				var deferred = $q.defer();
 
-			$http.delete(url + "/announcement/" + id)
-			.success(function(data) {
-				deferred.resolve(data);
-			})
-			.error(function(data) {
-				deferred.reject("Error: Cannot Delete Announcement");
-			});
+				$http.delete(url + "/announcement/" + id)
+				.success(function(data) {
+					deferred.resolve(data);
+				})
+				.error(function(data) {
+					deferred.reject("Error: Cannot Delete Announcement");
+				});
 		
 			return deferred.promise;
-		}
-		  	
-				return deferred.promise;
 			}
+		  	
+				
 
 		}
 
-})
+})();
