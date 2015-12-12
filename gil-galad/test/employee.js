@@ -25,7 +25,7 @@ describe('employee',function(){
 		it('should update a specific employee: first name field only', function (done) {
 			var update = {
 				'firstName': 'Marie Betel (edited)'
-			}; 
+			};
 			request(url)
 				.put('api/employees/' + insertedId)
 				.send(update)
@@ -83,7 +83,7 @@ describe('employee',function(){
 						res.body.should.have.property('firstName', 'Marie Betel (edited)');
 						res.body.should.have.property('lastName', 'de Robles (edited)');
 						res.body.should.have.property('unitId', 12345);
-						
+
 						done();
 					}
 				});
@@ -107,7 +107,7 @@ describe('employee',function(){
 					res.body.should.have.property('firstName', 'Marie Betel');
 					res.body.should.have.property('lastName', 'de Robles');
 					res.body.should.have.property('unitId', 12345);
-					
+
 					done();
 				});
 		});
@@ -132,7 +132,7 @@ describe('employee',function(){
 				});
 		});
 	});
-	
+
 	describe('insert()',function(){
 		it('should create a new employee', function (done) {
 			var employee = {
@@ -206,4 +206,26 @@ describe('employee',function(){
 				});
 		});
 	});
+
+	describe('findEmployees()', function() {
+	  it('should retrieve all employees', function (done) {
+	    request(url)
+	      .get('api/employees')
+	      .end(function(err, res) {
+	        if(err) {
+	          throw err;
+	        }
+	        res.should.have.status(200);
+					res.body.should.be.an.instanceOf(Object);
+					res.body.should.have.property('size');
+					res.body.should.have.property('data');
+					res.body.should.have.property('page');
+					res.body.data.should.be.an.instanceOf(Array);
+
+	        done();
+	      });
+	  });
+	});
+
+
 });

@@ -13,6 +13,7 @@ var studentRecord = require(__dirname + '/../gil-galad/controllers/api/student-r
 var assignFaculty = require(__dirname + '/../gil-galad/controllers/api/ocm/assign_faculty');
 var waitlist = require(__dirname + '/../gil-galad/controllers/api/ocm/waitlist');
 var section = require(__dirname + '/../gil-galad/controllers/api/section');
+var slot = require(__dirname + '/../gil-galad/controllers/api/slot');
 var announcement = require(__dirname + '/../gil-galad/controllers/api/announcement');
 var courseOfferings = require(__dirname + '/../gil-galad/controllers/api/course-offerings');
 var unit = require(__dirname + '/../gil-galad/controllers/api/unit');
@@ -30,6 +31,7 @@ var schedule = require(__dirname + '/../gil-galad/controllers/api/ocm/schedule')
 var role = require(__dirname + '/../gil-galad/controllers/api/role');
 var classlist = require(__dirname + '/../gil-galad/controllers/api/ocm/classlist');
 var sectionGet = require(__dirname + '/../gil-galad/controllers/api/section-get');
+var change_approval_request = require(__dirname + '/../gil-galad/controllers/api/change-approval-request');
 
 module.exports = function(router, logger) {
  	router.all('*', function (req, res, next) {
@@ -138,6 +140,9 @@ module.exports = function(router, logger) {
 	router.route('/api/plan-of-study')
 		.post(planOfStudy.insert);
 
+	router.route('/api/plan-of-study/change-approval-request')
+		.get(change_approval_request.find);
+
 	router.route('/api/students/:id/grades')
 		.get(grades.findstudentGrade);
 
@@ -198,6 +203,10 @@ module.exports = function(router, logger) {
 
 	router.route('/api/tcg')
 		.post(tcg.request);
+
+  router.route('/api/generate-slots')
+		.post(slot.generateSlots);
+
 
 	// router.route('/api/:userId/roles/:id')
 	// 	.put(role.userId, role.id);
