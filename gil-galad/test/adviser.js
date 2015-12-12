@@ -8,17 +8,17 @@ var config = require(__dirname + '/../../config/config'),
 	should = require('should-http'),
 	assert = require('assert'),
 	request = require('supertest');
-	
+
 
 describe('Registration adviser',function(){
 	var url = 'http://galadhrim.loc:' + (process.env.PORT || config.port);
 	var insertedId = 0;
 
 	describe("update()", function(){
-	
+
 		it('should update a specific registration adviser: name field only', function (done) {
 			var update = {
-				'registrationAdviser': 'Rommel Bulalacao';
+				'registrationAdviser': 'Rommel Bulalacao'
 			};
 			request(url)
 				.put('/api/student-record/' + insertedId + '/adviser')
@@ -34,10 +34,10 @@ describe('Registration adviser',function(){
 					}
 				});
 		});
-	
+
 		it('should return error if trying to update a registration adviser that does not exist', function (done) {
 			var update = {
-				'registrationAdviser': 'Rommel Bulalacao';
+				'registrationAdviser': 'Rommel Bulalacao'
 			};
 			request(url)
 				.put('/api/student-record/0/adviser')
@@ -53,6 +53,3 @@ describe('Registration adviser',function(){
 		});
 	});
 });
-
-
-	
