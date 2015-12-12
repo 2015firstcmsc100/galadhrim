@@ -26,6 +26,7 @@ var room = require(__dirname + '/../gil-galad/controllers/api/room');
 var change_password = require(__dirname + '/../gil-galad/controllers/api/password/change_password');
 var tcg = require(__dirname + '/../gil-galad/controllers/api/tcg');
 var cancel = require(__dirname + '/../gil-galad/controllers/api/ocm/cancel');
+var schedule = require(__dirname + '/../gil-galad/controllers/api/ocm/schedule');
 var role = require(__dirname + '/../gil-galad/controllers/api/role');
 var classlist = require(__dirname + '/../gil-galad/controllers/api/ocm/classlist');
 var sectionGet = require(__dirname + '/../gil-galad/controllers/api/section-get');
@@ -47,6 +48,9 @@ module.exports = function(router, logger) {
 
 	router.route('/api/ocm/classlist/:id')
 		.get(classlist.find);
+		
+	router.route('/api/ocm/schedule/:id')
+		.get(schedule.find);
 
  	router.route('/degree-programs')
  		.get(degreeProgram.find)
