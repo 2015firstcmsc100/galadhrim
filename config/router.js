@@ -183,6 +183,7 @@ module.exports = function(router, logger) {
 
 	router.route('/api/announcements/:id')
 		.get(announcement.findOne)
+		.put(announcement.update)
 		.delete(announcement.remove);
 
 	router.route('/api/monitoring/logs/:id')
