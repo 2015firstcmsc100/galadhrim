@@ -14,39 +14,39 @@ describe("announcements", function() {
       'expiryDate': '2015-11-31'
     };
 
-		it('should update a specific announcement', function (done) {
-			request(url)
-				.put('/api/announcements/' + insertedId)
-				.send(update)
-				.end(function(err, res) {
-					if (err) {
-						throw err;
-					}
-					else {
-						res.should.have.status(200);
-						res.body.should.have.property('userId', '3');
+    it('should update a specific announcement', function (done) {
+      request(url)
+        .put('/api/announcements/' + insertedId)
+        .send(update)
+        .end(function(err, res) {
+          if (err) {
+            throw err;
+          }
+          else {
+            res.should.have.status(200);
+            res.body.should.have.property('userId', '3');
             res.body.should.have.property('title', 'A new title announcement');
             res.body.should.have.property('description', 'A new announcement description');
             res.body.should.have.property('datePosted', '2015-11-11');
             res.body.should.have.property('expiryDate', '2015-11-31');
-						done();
-					}
-				});
-		});
+            done();
+          }
+        });
+    });
 
     it('should return error trying to update an announcement that does not exist', function (done) {
-			request(url)
-				.put('/api/announcements/0')
-				.send(update)
-				.end(function(err, res) {
-					if (err) {
-					   done();
-					}
-					else {
-					   throw new Error({'message': 'Can retrieve a non-existent announcement'});
-					}
-				});
-		});
+      request(url)
+        .put('/api/announcements/0')
+        .send(update)
+        .end(function(err, res) {
+          if (err) {
+             done();
+          }
+          else {
+             throw new Error({'message': 'Can retrieve a non-existent announcement'});
+          }
+        });
+    });
   });
 
   describe("remove()", function() {
