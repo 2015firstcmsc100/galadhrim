@@ -154,8 +154,11 @@ describe('Course',function(){
 
 		it('should return error trying to update a course record that does not exist', function (done) {
 			var update = {
-				'code': randomizedCode + ' (edited)',
-				'name': 'BS Computer Science (edited)'
+				'code', 'CMSC100';
+				'name': 'Introduction to Web Programming';
+				'units': '3'
+				'semesterOffered': '1st';
+				'unitId': courseCode;
 			};
 			request(url)
 				.put('/api/courses/0')
