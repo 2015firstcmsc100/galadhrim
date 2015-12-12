@@ -16,7 +16,7 @@ exports.findOne = function (req, res, next) {
 
 
 exports.remove = function(req, res, next) {
-	db.query("UPDATE unit SET _recStatus='Deleted' WHERE _id=?", [req.params.id], function(err, row) {
+	db.query("UPDATE unit SET _recStatus='DELETED' WHERE _id=?", [req.params.id], function(err, row) {
 		if (err) return next(err);
 		if (row.affectedRows === 0) {
 			res.send(400, {message: 'Unit ('+req.params.id+') was not removed.'});

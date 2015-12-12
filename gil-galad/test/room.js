@@ -131,4 +131,34 @@ describe('room', function() {
 		});
 	});
 
+
+   describe('remove()', function () {
+		it('should remove a specific room record', function (done) {
+			request(url)
+				.delete('/api/rooms/' + roomId)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+
+		it('should return error trying to remove a room record that does not exist', function (done) {
+			request(url)
+				.delete('/api/rooms/0')
+				.end(function(err, res) {
+					if (err) {
+						done();
+					}
+					else {
+						throw new Error({'message': 'Able to delete a non-existent room'});
+					}
+				});
+		});
+	});
+
+
 });
