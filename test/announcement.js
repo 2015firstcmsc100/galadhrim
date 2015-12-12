@@ -16,7 +16,7 @@ describe("announcements", function() {
 
     it('should update a specific announcement', function (done) {
       request(url)
-        .put('/api/announcements/' + insertedId)
+        .put('/api/announcements/1')
         .send(update)
         .end(function(err, res) {
           if (err) {
