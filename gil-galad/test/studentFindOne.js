@@ -6,8 +6,7 @@ var config = require(__dirname + '/../../config/config'),
 	utils = require(__dirname + '/../../lib/utils'),
 	should = require('should-http'),
 	assert = require('assert'),
-	request = require('supertest')
-  async = require('async');
+	request = require('supertest');
 
 describe('Students',function(){
 	var url = 'http://galadhrim.loc:' + (process.env.PORT || config.port);
