@@ -19,10 +19,11 @@ exports.update = function(req, res, next) {
 		res.send(404, {message: 'Request is not valid'});
 	}
 
-	db.query("UPDATE section SET "+column+" = "+value+", _updated = now() WHERE _id = ?", [req.params.id], function(err, rows) {
+	db.query("UPDATE section SET "+column+" = "+value+", _updated = now() WHERE _recStatus='ACTIVE' AND _id = ?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
-		db.query("SELECT * from section WHERE _id="+req.params.id, function(err, rows) {
+		db.query("SELECT * from section WHERE _recStatus='ACTIVE' AND _id="+req.params.id, function(err, rows) {
 			if (err) res.send(404, {message: 'Assigned Faculty of Section('+req.params.id+') was not updated.'});
+			if (rows.length===0) res.send(404, {message: 'Request is not valid: The section does not exist'});
 			res.send(rows[0]);
 		});
 	});
