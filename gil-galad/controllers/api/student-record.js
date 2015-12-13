@@ -14,7 +14,7 @@ exports.showAllStudentRecords = function(req, res, next){
 };
 
 exports.findAStudentRecord = function(req, res, next){
-	db.query("SELECT * FROM student WHERE _id=?", [req.params.id], function(err, rows){		//retrieving a student data
+	db.query("SELECT * FROM student WHERE _id=? AND _recStatus='ACTIVE' LIMIT 1", [req.params.id], function(err, rows){		//retrieving a student data
 		if(err) return next(err);		//skipping all the route handlers and send errors to client
 		if(rows.length===0){
 			res.status(404).send('Student record not found!');
