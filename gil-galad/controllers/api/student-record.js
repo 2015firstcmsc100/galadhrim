@@ -97,7 +97,7 @@ var selectOne = function(id, callback) {
 };
 
 exports.update = function(req, res, next) {
-	db.query("UPDATE student SET ? WHERE id=?", [req.body, req.params.id], function(err, rows) {
+	db.query("UPDATE student SET ? WHERE id=? AND _recStatus= 'ACTIVE' ", [req.body, req.params.id], function(err, rows) {
 		if (err) return next(err);
 		selectOne(req.params.id, function(updated) {
 
