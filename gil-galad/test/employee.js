@@ -216,6 +216,12 @@ describe('employee',function(){
 	          throw err;
 	        }
 	        res.should.have.status(200);
+					res.body.should.be.an.instanceOf(Object);
+					res.body.should.have.property('size');
+					res.body.should.have.property('data');
+					res.body.should.have.property('page');
+					res.body.data.should.be.an.instanceOf(Array);
+
 	        done();
 	      });
 	  });
