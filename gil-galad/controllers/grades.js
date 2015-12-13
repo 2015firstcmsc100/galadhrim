@@ -8,7 +8,7 @@ exports.findstudentGrade = function(req, res, next) {
 			res.send(404, {message: 'Student not found.' + err});
 		} else {
 			var object = {
-				data: rows[0],
+				data: rows,
 				size: rows.length
 			}
 			res.send(object);
