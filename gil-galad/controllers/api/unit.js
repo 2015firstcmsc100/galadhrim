@@ -16,7 +16,7 @@ exports.findOne = function (req, res, next) {
 
 
 exports.remove = function(req, res, next) {
-	db.query("UPDATE unit SET _recStatus='DELETED' WHERE _id=?", [req.params.id], function(err, row) {
+	db.query("UPDATE unit SET _recStatus='Deleted' WHERE _id=?", [req.params.id], function(err, row) {
 		if (err) return next(err);
 		if (row.affectedRows === 0) {
 			res.send(400, {message: 'Unit ('+req.params.id+') was not removed.'});
@@ -28,6 +28,21 @@ exports.remove = function(req, res, next) {
 		
 	});
 };
+
+//insert
+exports.insert = function(req,res,next){
+	db.query("INSERT INTO unit(_code,_name,_id) VALUES(?,?,?);", [req.params.code, req.params.name,req.params.id], function(err, row){
+		if(err) return(err);
+		if(row.affectedRows === 0){
+			res.send(400, {message: 'Unit ('+req.params.id+') was not removed.'});
+		}else{
+			selectOne(req.params.id, function(updatedRow){
+				res.status(202).send(updatedRow);
+			});
+		}
+	});
+};
+
 
 // Update unit
 exports.update = function(req, res, next) {
@@ -53,3 +68,5 @@ var selectOne = function(id, callback) {
 		}
 	});
 }
+
+
