@@ -31,7 +31,7 @@ var schedule = require(__dirname + '/../gil-galad/controllers/api/ocm/schedule')
 var role = require(__dirname + '/../gil-galad/controllers/api/role');
 var classlist = require(__dirname + '/../gil-galad/controllers/api/ocm/classlist');
 var sectionGet = require(__dirname + '/../gil-galad/controllers/api/section-get');
-var change_approval_request = require(__dirname + '/../gil-galad/controllers/api/change-approval-request');
+var change_approval_request = require(__dirname + '/../gil-galad/controllers/api/plan-of-study/change-approval-request');
 var honor = require(__dirname + '/../gil-galad/controllers/api/students/honor');
 
 module.exports = function(router, logger) {

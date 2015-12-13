@@ -122,7 +122,7 @@ exports.assign_RegAdviser = function(req,res,next){
 		if(err) return next(err);
 		selectOne(req.params.id, function(newRow){
 			if(!newRow){
-				res.send(400, {messageL 'Registration Adviser ('+row.insertId+') was not created.'});
+				res.send(400, {message: 'Registration Adviser ('+row.insertId+') was not created.'});
 			}else{
 				res.send(newRow);
 			}
@@ -166,4 +166,3 @@ exports.update_isDeletedRecord = function(req, res, next) {
 		});
 	});
 };
-

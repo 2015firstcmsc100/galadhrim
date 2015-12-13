@@ -1,5 +1,5 @@
-var logger = require(__dirname + '/../../../lib/logger'),
-    db = require(__dirname + '/../../lib/mysql');
+var config  = require(__dirname + '/../../../../config/config'),
+    db  	= require(__dirname + '/../../../lib/mysql');
 
 exports.find = function(req, res, next) {
 	db.query("SELECT * FROM plan_of_study WHERE isApproved = 'PENDING' AND  previousCourseId is NOT NULL", function(err, rows){
