@@ -2,7 +2,7 @@ var should = require("should-http");
 var request = require("supertest");
 
 describe("announcements", function() {
-  var url = "localhost:5000";
+  var url = "http://localhost:5000";
 
   describe('update()', function () {
 
@@ -50,7 +50,7 @@ describe("announcements", function() {
   });
 
   describe("remove()", function() {
-    it("should return the deleted announcement", function(done) {
+    it("should return the deleted announcement and check if _recStatus was marked as DELETED", function(done) {
       request(url)
         .delete("/api/announcements/0")
         .end(function(err, res) {
@@ -59,29 +59,30 @@ describe("announcements", function() {
           } else {
             res.should.have.status(202);
             res.body.should.be.an.instanceof(Object);
-            res.should.have.properties(["_id", "userId", "title", "description", "datePosted", "expiryDate", "_created", "_recStatus"]);
-            done();
-          }
-        });
-    });
-
-    it("should mark _recStatus of announcement as DELETED", function(done) {
-      request(url)
-        .delete("/api/announcements/0")
-        .end(function(err, res) {
-          if(err) {
-            done();
-          } else {
-            res.should.have.status(202);
+            res.should.have.properties(["_id", "title", "description", "datePosted", "expiryDate", "_created"]);
             res.should.have.property("_recStatus", "DELETED");
             done();
           }
         });
     });
 
-    it("should return error trying to delete an announcement record that does not exist", funtion(done) {
+    it("should return error trying to delete an announcement with invalid id", funtion(done) {
       request(url)
         .delete("/api/announcements/pogi")
+        .end(function(err, res) {
+          if(err) {
+            done();
+          } else {
+            throw new Error({
+              "message": "Can delete an announcement record with invalid id."
+            });
+          }
+        });
+    });
+
+    it("should return error trying to delete an announcement that does not exist", funtion(done) {
+      request(url)
+        .delete("/api/announcements/0")
         .end(function(err, res) {
           if(err) {
             done();
