@@ -3,7 +3,7 @@ var	logger = require(__dirname + '/../../../lib/logger'),
 
 
 exports.showAllStudentRecords = function(req, res, next){
-	db.query("SELECT * FROM student" , function(err, rows){		//retrieving a student data
+	db.query("SELECT * FROM student WHERE _recStatus='ACTIVE'" , function(err, rows){		//retrieving a student data
 		if(err) return next(err);		//skipping all the route handlers and send errors to client
 		if(rows.length===0){
 			res.status(404).send('No Student Records Found!');
