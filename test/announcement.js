@@ -60,6 +60,7 @@ describe("announcements", function() {
             res.should.have.status(202);
             res.body.should.be.an.instanceof(Object);
             res.should.have.properties(["_id", "userId", "title", "description", "datePosted", "expiryDate", "_created", "_recStatus"]);
+            done();
           }
         });
     });
