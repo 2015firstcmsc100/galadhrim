@@ -83,6 +83,9 @@ module.exports = function(router, logger) {
  	router.route('/api/curricula')
  		.get(curricula.find);
 
+  router.route('/api/curricula/:id')
+ 		.put(curricula.update);
+
 	router.route('/api/units/:id')
 		.get(unit.findOne)
         .delete(unit.remove)
@@ -207,9 +210,9 @@ module.exports = function(router, logger) {
 
   router.route('/api/generate-slots')
 		.post(slot.generateSlots);
-	
+
 	router.route('/api/students/honor')
-		.get(honor.getStudents);	
+		.get(honor.getStudents);
 
 
 	// router.route('/api/:userId/roles/:id')
