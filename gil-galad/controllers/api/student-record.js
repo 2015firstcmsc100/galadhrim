@@ -116,6 +116,20 @@ exports.update = function(req, res, next) {
 	});
 };
 
+
+exports.assign_RegAdviser = function(req,res,next){
+	db.query("INSERT INTO student_adviser(studentId, registrationAdvier) VALUES (?,?)",[req.body.studentId, req.body.registrationAdviser], function(err,rows){
+		if(err) return next(err);
+		selectOne(req.params.id, function(newRow){
+			if(!newRow){
+				res.send(400, {messageL 'Registration Adviser ('+row.insertId+') was not created.'});
+			}else{
+				res.send(newRow);
+			}
+		});
+	});
+}
+
 exports.update_RegAdviser = function(req, res, next) {
 	db.query("UPDATE student_adviser SET ? WHERE id=? AND studentId=?", [req.body, req.params.id, req.params.id], function(err, rows) {
 		if (err) return next(err);			//skipping route handlers and send errors to client
