@@ -132,3 +132,18 @@ describe('Waitlist', function() {
 		});
 
 	});
+
+	describe("insert()", function(){
+		it('should insert sample data', function(done){
+			request(url)
+			.post('api/ocm/waitlist')
+			.send({'studentId':'2010-12345', 'sectionId':1})
+			.end(function(err, res){
+				if (err) throw err;
+				res.should.have.status(200);
+				res.body.should.be.an.instanceOf(Object);
+				done();
+			});
+		});
+	});
+});

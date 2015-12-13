@@ -46,6 +46,18 @@ exports.findOne = function(req, res, next){
 	});
 };
 
+exports.insert = function(req, res, next){
+	db.query("INSERT INTO waitlist(studentId, sectionId) VALUES (?,?)", [req.body.studentId, req.body.sectionId], function(err, rows){
+		if (err) return next(err);
+		if (rows.length === 0){
+			res.send(404, {message: 'Error creating waitlist.'})	
+		}
+		else {
+			res.send(200, rows);
+		}
+	});
+};
+
 var selectOne = function(id, callback) {
 	db.query("SELECT * FROM waitlist WHERE _id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);
