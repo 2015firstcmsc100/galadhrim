@@ -18,6 +18,29 @@ exports.remove = function(req, res, next) {
 	});
 };
 
+exports.insert = function(req, res, next) {		//functio for posting grade
+	if (!req.body.studentId){					//studentId is a required parameter
+		return res.send(451, {'error': true, 'message': 'Missing parameter: studentId'});
+	}
+	if (!req.body.sectionId){					//sectionId is a required parameter
+		return res.send(451, {'error': true, 'message': 'Missing parameter: sectionId'});
+	}
+	if (!req.body.grade) {						//grade is a required parameter
+		return res.send(451, {'error': true, 'message': 'Missing parameter: grade'});
+	}
+
+	db.query("INSERT INTO grade(studentId, sectionId, grade, remarks) VALUES(?, ?, ?, ?)", [req.body.studentId, req.body.sectionId, req.body.grade, req.body.remarks], function(err, row) {	//INSERT TO GRADE QUERY
+		if (err) return next(err);
+		selectOne(row.insertId, function(newRow) {	// check if grade is in the table of grades
+			if (!newRow) {		
+				res.send(400, {message: 'Grade ('+row.insertId+') was not created.'});
+			} else {
+				res.send(newRow);
+			}
+		});
+	});
+};
+
 var selectOne = function(id, callback) {
 	db.query("SELECT * FROM grade WHERE _id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);

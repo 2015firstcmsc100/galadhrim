@@ -25,7 +25,7 @@ describe('employee',function(){
 		it('should update a specific employee: first name field only', function (done) {
 			var update = {
 				'firstName': 'Marie Betel (edited)'
-			}; 
+			};
 			request(url)
 				.put('api/employees/' + insertedId)
 				.send(update)
@@ -83,7 +83,7 @@ describe('employee',function(){
 						res.body.should.have.property('firstName', 'Marie Betel (edited)');
 						res.body.should.have.property('lastName', 'de Robles (edited)');
 						res.body.should.have.property('unitId', 12345);
-						
+
 						done();
 					}
 				});
@@ -107,7 +107,7 @@ describe('employee',function(){
 					res.body.should.have.property('firstName', 'Marie Betel');
 					res.body.should.have.property('lastName', 'de Robles');
 					res.body.should.have.property('unitId', 12345);
-					
+
 					done();
 				});
 		});
@@ -132,4 +132,100 @@ describe('employee',function(){
 				});
 		});
 	});
+
+	describe('insert()',function(){
+		it('should create a new employee', function (done) {
+			var employee = {
+				'firstName': 'Marie Betel',
+				'lastName': 'de Robles',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					res.body.should.have.keys(['firstName','lastName','unitId']);
+					insertedId = res.body._id;
+					done();
+				});
+		});
+
+		it('should return error trying to create an employee with duplicate code', function (done) {
+			var employee = {
+				'firstName': 'Marie Betel',
+				'lastName': 'de Robles',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						done();
+					} else {
+						throw new Error({'message': 'Able to create an employee despite duplicate code'});
+					}
+				});
+		});
+
+		it('should return error trying to create an employee without last name', function (done) {
+			var employee = {
+				'firstName': 'Marie Betel',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						done();
+					} else {
+						throw new Error('Able to create an employee without last name');
+					}
+				});
+		});
+
+		it('should return error trying to create an employee without first name', function (done) {
+			var employee = {
+				'lastName': 'de Robles',
+				'unitId':100
+			};
+			request(url)
+				.post('api/employees')
+				.send(employee)
+				.end(function(err, res) {
+					if (err) {
+						done();
+					} else {
+						throw new Error('Able to create section without first name');
+					}
+				});
+		});
+	});
+
+	describe('findEmployees()', function() {
+	  it('should retrieve all employees', function (done) {
+	    request(url)
+	      .get('api/employees')
+	      .end(function(err, res) {
+	        if(err) {
+	          throw err;
+	        }
+	        res.should.have.status(200);
+			//		res.body.should.be.an.instanceOf(Object);
+			//		res.body.should.have.property('size');
+			//		res.body.should.have.property('data');
+			//		res.body.should.have.property('page');
+			//		res.body.data.should.be.an.instanceOf(Array);
+
+	        done();
+	      });
+	  });
+	});
+
+
 });

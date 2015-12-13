@@ -13,6 +13,19 @@ exports.find = function(req, res, next) {
 	});
 };
 
+exports.findOne = function(req, res, next) {
+  db.query("SELECT * FROM course WHERE _id=? AND _recStatus='ACTIVE'", [req.params.id], function(err, rows) {
+    if(err) return next(err);
+    if(rows.length === 0) {
+      res.status(404).send({
+        "message": "Course " + req.params.id + " was not found."
+      });
+    } else {
+      res.send(rows);
+    }
+  });
+}
+
 
 exports.insert = function(req, res, next) {
 	if (!req.body.code) {

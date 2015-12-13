@@ -3,44 +3,44 @@ var logger = require(__dirname + '/../../../lib/logger'),
 var async = require('async');
 
 exports.insert = function(req, res, next) {
-	if (!req.params.userId) {
+	if (!req.body.userId) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: userId'});
 	}
-	if (!req.params.title) {
+	if (!req.body.title) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: title'});
 	}
-	if (!req.params.description) {
+	if (!req.body.description) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: description'});
 	}
-  if (!req.params.datePosted) {
+  if (!req.body.datePosted) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: datePosted'});
 	}
-  if (!req.params.expiryDate) {
+  if (!req.body.expiryDate) {
 		return res.send(451, {'error': true, 'message': 'Missing parameter: expiryDate'});
 	}
 
-	db.query("INSERT INTO announcement(userId, title, description, datePosted, expiryDate) VALUES(?, ?, ?, ?, ?)", [req.params.userId, req.params.title, req.params.description, req.params.datePosted, req.params.expiryDate], function(err, row) {
+	db.query("INSERT INTO announcement(userId, title, description, datePosted, expiryDate) VALUES(?, ?, ?, ?, ?)", [req.body.userId, req.body.title, req.body.description, req.body.datePosted, req.body.expiryDate], function(err, row) {
 		if (err) return next(err);
 		selectOne(row.insertId, function(newRow) {
 			if (!newRow) {
-				res.send(400, {message: 'Announcement ('+row.insertId+') was not created.'});
+				res.send(552, {message: 'Announcement ('+row.insertId+') was not created.'});
 			} else {
 				res.send(newRow);
 			}
 		});
 	});
-};
 
-var selectOne = function(id, callback) {
-	db.query("SELECT * FROM announcement WHERE id=? LIMIT 1", [id], function(err, rows) {
-		if (err) return next(err);
-		if (rows.length === 0) {
-			callback(null);
-		} else {
-			callback(rows[0]);
-		}
-	});
-}
+  var selectOne = function(id, callback) {
+  	db.query("SELECT * FROM announcement WHERE _id=? LIMIT 1", [id], function(err, rows) {
+  		if (err) return next(err);
+  		if (rows.length === 0) {
+  			callback(null);
+  		} else {
+  			callback(rows[0]);
+  		}
+  	});
+  }
+};
 
 exports.findOne = function (req, res, next) {
 	db.query("SELECT * FROM announcement WHERE _id=? LIMIT 1", [req.params.id], function(err, rows) {
@@ -76,11 +76,11 @@ exports.remove = function(req, res) {
 	async.waterfall([
 		function(callback) {
 			db.query("SELECT COUNT (*) as count FROM announcement WHERE _recStatus = 'ACTIVE' AND _id = ?",
-			[req.params.id], function(err, rows) {		
+			[req.params.id], function(err, rows) {
 				if(err) {
 					callback(err, null);
 				} else {
-					callback(null, rows);	
+					callback(null, rows);
 				}
 
 			});
@@ -97,7 +97,7 @@ exports.remove = function(req, res) {
 					if(err) {
 						callback(err, null);
 					} else {
-						callback(null, true);	
+						callback(null, true);
 					}
 			});
 		}, function(data, callback) {
@@ -106,7 +106,7 @@ exports.remove = function(req, res) {
 					if(err) {
 						callback(err, null);
 					} else {
-						callback(null, rows[0]);	
+						callback(null, rows[0]);
 					}
 			});
 		}
@@ -118,3 +118,28 @@ exports.remove = function(req, res) {
 		}
 	});
 };
+
+exports.update = function(req, res, next) {
+	db.query("UPDATE announcement SET ?,_updated = now() WHERE _id = ?", [req.body, req.params.id], function(err, rows) {
+		if (err) return next(err);
+		selectOne(req.params.id, function(updatedRow) {
+			if (!updatedRow) {
+				res.send(553, {message: 'Announcement ('+req.params.id+') was not updated.'});
+			} else {
+				res.send(updatedRow);
+			}
+		});
+	});
+
+	var selectOne = function(id, callback) {
+  	db.query("SELECT * FROM announcement WHERE _id=? LIMIT 1", [id], function(err, rows) {
+  		if (err) return next(err);
+  		if (rows.length === 0) {
+  			callback(null);
+  		} else {
+  			callback(rows[0]);
+  		}
+  	});
+  }
+};
+

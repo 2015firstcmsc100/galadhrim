@@ -17,4 +17,30 @@ exports.find = function(req,res,next){
     }
   );
 
+};
+
+
+
+//DELETE COURSE-OFFERINGS: Marks all sections within a specific year and sem as deleted.
+exports.removeSections = function(req, res, next) {
+	db.query("UPDATE section SET _recStatus ='DELETED',_updated = now() WHERE year=? and semester=?", [req.params.year,req.params.sem], 
+		function(err, rows) {
+			if (err) return next(err);
+			
+			if (rows.length === 0) {
+			
+				res.status(400).send( {message: 'Course-offerings in year '+req.params.year+': '+req.params.sem+' semester WAS NOT REMOVED.'});
+				//res.send(400, {message: 'Course-offerings in year '+req.params.year+': '+req.params.sem+' semester WAS NOT REMOVED.'});
+			} else {
+				res.status(200).send(rows);
+				//res.send(200, rows);
+			}
+		});
 }
+
+
+
+
+
+
+

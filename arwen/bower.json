@@ -1,0 +1,25 @@
+{
+  "name": "arwen",
+  "main": "index.html",
+  "homepage": "index.html",
+  "authors": [
+    "Josif78 <seph12.alc@gmail.com>"
+  ],
+  "description": "Office of the Secretary Sub-Application",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6",
+    "angular-route": "~1.4.8",
+    "angular-cookie": "~4.0.9"
+  }
+}

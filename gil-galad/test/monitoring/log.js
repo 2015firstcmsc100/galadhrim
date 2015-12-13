@@ -81,4 +81,34 @@ describe('Log', function(){
 
 
 	});
+
+	describe('findOne()', function () {
+		it('should retrieve a specific log record', function (done) {
+			request(url)
+				.get('/api/monitoring/logs/' + insertedId)
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+
+		it('should return error trying to retrieve a log record that does not exist', function (done) {
+			request(url)
+				.get('/api/monitoring/logs/0')
+				.end(function(err, res) {
+					if (err) {
+						done();
+					}
+					else {
+						throw new Error({'message': 'Able to retrieve a non-existent log record'});
+					}
+				});
+		});
+	});
+
+
 });

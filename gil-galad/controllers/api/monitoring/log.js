@@ -11,3 +11,13 @@ exports.findOne = function(req,res,next){
 		}
 	});
 };
+
+exports.createLog = function(req,res,next){
+	db.query("INSERT INTO __log(userId, action, result) VALUES (?,?,?);", [
+			req.body.userId,
+			req.body.action,
+			req.body.result
+		], function(err,rows){
+			findOne(req,res,next);
+		});
+};
