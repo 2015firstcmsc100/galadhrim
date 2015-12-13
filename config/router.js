@@ -114,7 +114,7 @@ module.exports = function(router, logger) {
     	// router.route('/api/logout/:id')
     	// 	.put(logout.logout);
 
-	router.route('/api/user/profile-picture/:id')
+	router.route('/api/user/update-profile-picture/:id')
 		.put(profilePicture.update);
 
 	router.route('/api/password/reset/:id')

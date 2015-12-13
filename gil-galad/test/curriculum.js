@@ -83,7 +83,7 @@ describe('Curriculum', function() {
 	describe('findOne()', function () {
 		it('should retrieve a specific curriculum', function (done) {
 			request(url)
-				.get('/api/curricula/0')
+				.get('/api/curricula/1')
 				.end(function(err, res) {
 					if (err) {
 						throw err;
@@ -97,7 +97,7 @@ describe('Curriculum', function() {
 
 		it('should return error trying to retrieve a specific curriculum that does not exist', function (done) {
 			request(url)
-				.get('/api/curricula/0')
+				.get('/api/curricula/1')
 				.end(function(err, res) {
 					if (err) {
 						done();
