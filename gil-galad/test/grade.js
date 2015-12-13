@@ -92,4 +92,40 @@ describe('StudentGrade', function(){
 		});
 	});
 	
+	describe("find()",function(){
+			
+			it("should return 404 retrieving a grade from a non-existent student", function(done){
+			request(url)
+			.get("/api/students/"+insertedId+"/grades")
+			.end(function(err,res){
+				//should.not.exist(insertedId);
+				if(err){	//if error occurs from non-existent studentID
+					throw err;
+					
+				}
+				else{		//else, return 200
+					res.should.have.status(200);
+				}
+				done();
+			
+				});
+			});
+
+			it("should not return any error", function(done){
+			request(url)	//return 200 if it exists.
+			.get("/api/students/"+insertedId+"/grades")
+			.end(function(err,res){
+			//	should.exist(insertedId);
+			if(err){
+				res.should.have.status(200);
+			}
+			else{
+				throw err;
+			}
+			done();
+				});
+			}); 
+		
+	});
+	
 });

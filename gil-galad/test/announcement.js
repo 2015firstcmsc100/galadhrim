@@ -76,4 +76,20 @@ describe('announcement', function() {
 				});
 		});
 	});
+	
+	describe('find()', function () {
+		it('should retrieve all recorded announcements', function (done) {
+			request(url)
+				.get('/announcements/')
+				.end(function(err, res) {
+					if (err) {
+						throw err;
+					}
+					res.should.have.status(200);
+					done();
+				});
+		});
+
+	});
+	
 });
