@@ -207,3 +207,28 @@ describe('unit', function() {
 	});
 
 });
+
+	describe('remove()', function(){ 
+		it('should delete units', function(done){ 
+			request(url) 
+				.delete('/api/units/' + insertedId) 
+				.end(function(err,res){ 
+					if(err){ 
+						throw err; 
+					} 
+					res.should.have.status(200); 
+					done(); 
+					}); 
+		});
+		it('should return error trying to remove units that does not exist', function(done){ 
+			request(url) 
+				.delete('/api/units/0') 
+				.end(function(err,res){ 
+					if(err){ 
+						done(); 
+					}else{ 
+						throw new Error({ 'message' : 'Able to delete a non-existent unit' }); 
+					} 
+				});                   
+		});             
+	});
