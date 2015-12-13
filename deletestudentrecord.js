@@ -8,7 +8,7 @@ var config = require(__dirname + '/../config/config'),
      describe("delete()", function(){
             it("student does not exist", function(done){  
                    request(url)
-                   .del("/api/students/:0")
+                   .delete("/api/students/0")
                    .end(function(err, res){
                      res.should.have.status(404);
                      done();
@@ -17,7 +17,7 @@ var config = require(__dirname + '/../config/config'),
                
                it("student exists", function(done){  
                    request(url)
-                   .del("/api/students/:1")
+                   .delete("/api/students/1")
                    .end(function(err, res){
                      res.should.have.status(202);
                      done();
