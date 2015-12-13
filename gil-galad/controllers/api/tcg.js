@@ -15,6 +15,13 @@
 var logger = require(__dirname + '/../../../lib/logger'),
     db = require(__dirname + '/../../lib/mysql');
     
+exports.find = function(req, res, next) {
+	db.query("SELECT * FROM tcg", function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
+	
 exports.request = function(req, res, next) {
 	if (!req.body.studentId) {
 		return res.status(400).send({'error': true, 'message': 'Missing parameter: studentId'});

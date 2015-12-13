@@ -206,6 +206,7 @@ module.exports = function(router, logger) {
 		.get(room.findOne);
 
 	router.route('/api/tcg')
+		.get(tcg.find)
 		.post(tcg.request);
 
   router.route('/api/generate-slots')
