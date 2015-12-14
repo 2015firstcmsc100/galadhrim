@@ -43,7 +43,7 @@ exports.insert = function(req, res, next) {
 };
 
 exports.findOne = function (req, res, next) {
-	db.query("SELECT * FROM announcement WHERE _id=? LIMIT 1", [req.params.id], function(err, rows) {
+	db.query("SELECT * FROM announcement WHERE _id=? AND _recstatus = 'ACTIVE' LIMIT 1", [req.params.id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			res.status(404);
@@ -56,7 +56,7 @@ exports.findOne = function (req, res, next) {
 }
 
 exports.find = function (req, res, next) {
-	db.query("SELECT * FROM announcement ",  function(err, rows) {
+	db.query("SELECT * FROM announcement WHERE _recstatus = 'ACTIVE'",  function(err, rows) {
 		if (err) return next(err);
 		 else {
 			res.status(200);
