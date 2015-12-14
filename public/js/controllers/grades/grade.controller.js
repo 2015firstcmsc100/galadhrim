@@ -22,7 +22,7 @@
 					$scope.newGrade.sectionId: "";
 					$scope.newGrade.grade: "";
 					$scope.newGrade.remarks: "";
-					$scope.newGrade.push(data);
+					$scope.grades.push(data);
 				});		
 
 			GradesService.getAll()
